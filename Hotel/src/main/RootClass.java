@@ -2,17 +2,24 @@ package main;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedList;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,7 +32,6 @@ import main.Booking.BType;
 
 public class RootClass extends Application {
 	
-	LocalDateTime currentTime;
 	
 
 	@Override
@@ -37,58 +43,96 @@ public class RootClass extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-
+		//lists for 'upcomingEvents' center pane
+		ObservableList<HBox> obj=FXCollections.observableArrayList();
+		ListView<HBox> listOfEvents = new ListView<>(obj);
 		
+	
 		
+		//StackPane for 'root' center pane
 		StackPane centerStack = new StackPane();
+		
+		//test labels for testing buttons in 'root' top pane
 		Label stack0 = new Label("Button 1");
 		Label stack1 = new Label("Button 2");
 		Label stack2 = new Label("Button 3");
 		Label stack3 = new Label("Button 4");
-		Label upcomingEvents = new Label("Upcoming events");
-		
-		//centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
-		root.setCenter(centerStack);
 		
 		
-		VBox bottomNode = new VBox();
+		//Settings for 'upcoming events' BorderPane
+		BorderPane upcomingEvents = new BorderPane();			
+		VBox rightOfCenterPane = new VBox();
+		VBox leftOfCenterPane = new VBox();
+		rightOfCenterPane.setPrefWidth(300);
+		leftOfCenterPane.setPrefWidth(300);
+		
+		//Test button for adding in 'upcoming events'
+		Button add = new Button("add obj");
+		
+		//Add nodes to 'upcoming events' BorderPane
+		upcomingEvents.setRight(rightOfCenterPane);
+		upcomingEvents.setBottom(add);
+		upcomingEvents.setCenter(listOfEvents);
+		upcomingEvents.setLeft(leftOfCenterPane);
+		
+	
+
+		
+		//VBox for bottom pane in 'root' BorderPane
+		VBox bottomVBoxInRoot = new VBox();
 		Label head = new Label("Upcoming events");
 		head.setFont(Font.font(STYLESHEET_CASPIAN, 25));
-		Label test1 = new Label("17:00 Spa");
-		Label test2 = new Label("19:00 Table booked - 4 persons");
-		Label test3 = new Label("21:00 Sauna booked");
-		Label test4 = new Label("23:00 Taxi booked - 4 persons");
-		Label test5 = new Label("add 1");
-		Label test6 = new Label("add 2");
-		bottomNode.getChildren().addAll(head,test1,test2,test3,test4);
+		bottomVBoxInRoot.getChildren().add(head);
 	
 		
+		//event for button in 'upcomingEvents' bottom
+		add.setOnAction(event->{
+			LocalDateTime currenttime = LocalDateTime.now();
+			HBox hbox = new HBox(10);
+			Button x = new Button("X");
+			Label test1 = new Label(currenttime.getHour()+":"+currenttime.getSecond()+" fahf");
+
+			hbox.getChildren().addAll(test1,x);
+			obj.add(hbox);
+			
+			x.setOnAction(event2->{
+				obj.remove(hbox);
+			});
+		});
 		
-	
-		bottomNode.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
-			currentTime = LocalDateTime.now();
-			//bottomNode.getChildren().remove(1);
-			//bottomNode.getChildren().add(new Label(" test 1"));
+		
+		//creates mouse event for VBox in root
+		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
+
+			//clears root center and adds BorderPane 'upcomingEvents'
 			centerStack.getChildren().clear();
 			centerStack.getChildren().add(upcomingEvents);
 			
 			
 		});
 		
-		bottomNode.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->{
+		//makes big label in bottom root VBox change color to GRAY when hovering
+		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->{
 			
 			head.setTextFill(Color.GRAY);
-			
-			
 		});
 		
-		bottomNode.addEventHandler(MouseEvent.MOUSE_EXITED, event ->{
+		
+		//makes big label in bottom root VBox change color to BLACK when not hovering
+		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_EXITED, event ->{
 			
 			head.setTextFill(Color.BLACK);
 			
 			
 		});
-		root.setBottom(bottomNode);
+		
+		root.setCenter(centerStack);
+		root.setBottom(bottomVBoxInRoot);
+		
+		
+
+		
+		
 		
 		
 		StackPane top = new StackPane();
