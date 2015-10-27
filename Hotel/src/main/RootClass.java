@@ -45,6 +45,7 @@ public class RootClass extends Application {
 		Label stack1 = new Label("Button 2");
 		Label stack2 = new Label("Button 3");
 		Label stack3 = new Label("Button 4");
+		
 		Label upcomingEvents = new Label("Upcoming events");
 		
 		//centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
@@ -110,11 +111,15 @@ public class RootClass extends Application {
 		Button spa = new Button("SPA");
 		Button transport = new Button("TRANSPORT");
 		Button houseKeeping = new Button("HOUSEKEEPING");
+		food.setPrefWidth(150);
+		spa.setPrefWidth(150);
+		transport.setPrefWidth(150);
+		houseKeeping.setPrefWidth(150);
 		
 		VBox id = new VBox(10);
 		id.setAlignment(Pos.CENTER);
 		Label roomNumber = new Label("237");
-		Label fullName = new Label("Eyvind");
+		Label fullName = new Label("No Name");
 		Button hKButton = new Button("Cleaning");
 		id.getChildren().addAll(roomNumber, fullName, hKButton);
 		
