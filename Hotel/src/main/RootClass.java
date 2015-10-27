@@ -95,12 +95,11 @@ public class RootClass extends Application {
 		id.setAlignment(Pos.CENTER);
 		Label roomNumber = new Label("237");
 		Label fullName = new Label("Eyvind");
-		Button hKButton = new 
+		Button hKButton = new Button("Cleaning");
 		
 		buttons.getChildren().addAll(food, spa, transport, houseKeeping);
 		rootTop.setCenter(nightView);
 		rootTop.setBottom(buttons);
-		rootTop.setLeft(id);
 		root.setTop(rootTop);
 		
 	}
