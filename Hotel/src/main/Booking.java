@@ -9,8 +9,7 @@ public abstract class Booking extends Room {
 	protected Date stopTime;
 	protected float price;
 	protected Date bookingTime;
-	protected 
-	enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
+	protected enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
 	protected BType type;
 	
 	private Booking(String name, int roomNum){
