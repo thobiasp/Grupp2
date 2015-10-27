@@ -93,14 +93,11 @@ public class RootClass extends Application {
 		
 		//VBox for bottom pane in 'root' BorderPane
 		VBox bottomVBoxInRoot = new VBox();
+		bottomVBoxInRoot.setPrefHeight(125);
 		Label head = new Label("Upcoming events");
-		HBox first = new HBox();
-		HBox second = new HBox();
-		HBox third = new HBox();
-		HBox forth = new HBox();
 		
 		head.setFont(Font.font(STYLESHEET_CASPIAN, 25));
-		bottomVBoxInRoot.getChildren().addAll(head,first,second,third,forth);
+		bottomVBoxInRoot.getChildren().addAll(head);
 	
 		
 		//event for button in 'upcomingEvents' bottom
@@ -122,25 +119,29 @@ public class RootClass extends Application {
 			//adding key:date and value:type  to TreeMap 'mapForEvents'
 			mapForEvents.put(dateToMap,typeToMap);
 			
-			
-			cancelButton.setOnAction(event2->{
-				obj.remove(hbox);
-				mapForEvents.remove(dateToMap);
-			});
-			
 			/*
 			Set<Entry<String,String>> set = mapForEvents.entrySet();
 			Iterator<Entry<String, String>> iterator = set.iterator();
-			finalText="";
-			while(iterator.hasNext()){
+			if(iterator.hasNext()){
 				Entry<String, String> person = iterator.next();
-
-				finalText +=person.getKey()+" "+person.getValue()+"\n";
-			}
-
-			stack0.setText(finalText);*/
-					
+				String stringOne = person.getKey();
+				String stringTwo = person.getValue();
+				Label one = new Label(stringOne);
+				Label two = new Label(stringTwo);
+				HBox head2= new HBox(one,two);
+				bottomVBoxInRoot.getChildren().add(head2);
+			}*/
 			
+			//events for cancel button
+			cancelButton.setOnAction(event2->{
+				obj.remove(hbox);
+				mapForEvents.remove(dateToMap);
+				
+				/*
+				bottomVBoxInRoot.getChildren().remove(1);
+				*/		
+			});
+					
 		});
 		
 		
