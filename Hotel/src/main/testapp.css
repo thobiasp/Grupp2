@@ -1,0 +1,10 @@
+.root{
+	-fx-background-color: "black";
+}
+
+
+.button{
+    background-color: "red";
+    opacity: 0.2;
+    
+}
