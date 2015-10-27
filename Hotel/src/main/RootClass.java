@@ -65,7 +65,7 @@ public class RootClass extends Application {
 		bottomNode.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
 			currentTime = LocalDateTime.now();
 			bottomNode.getChildren().remove(1);
-			bottomNode.getChildren().add(new Label(currentTime.getHour()+":"+currentTime.getMinute()+":"+currentTime.getSecond()+ " test 1"));
+			bottomNode.getChildren().add(new Label(" test 1"));
 			
 			
 		});
