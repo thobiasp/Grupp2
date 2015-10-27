@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -20,10 +21,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontSmoothingType;
 import javafx.stage.Stage;
 import javafx.util.converter.LocalDateTimeStringConverter;
+import main.Booking.BType;
 
 public class RootClass extends Application {
 	
 	LocalDateTime currentTime;
+	
 
 	@Override
 	public void start(Stage primaryStage) {
