@@ -43,6 +43,21 @@ public class RootClass extends Application {
 			
 			test.setText("Test");
 			
+			
+		});
+		
+		bottomNode.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->{
+			
+			head.setTextFill(Color.GRAY);
+			
+			
+		});
+		
+		bottomNode.addEventHandler(MouseEvent.MOUSE_EXITED, event ->{
+			
+			head.setTextFill(Color.BLACK);
+			
+			
 		});
 		root.setBottom(bottomNode);
 		
