@@ -32,8 +32,14 @@ public class RootClass extends Application {
 
 		
 		StackPane centerStack = new StackPane();
-		TextArea test = new TextArea();
-		root.setCenter(test);
+		Label stack0 = new Label("Button 1");
+		Label stack1 = new Label("Button 2");
+		Label stack2 = new Label("Button 3");
+		Label stack3 = new Label("Button 4");
+		
+		centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
+		
+		root.setCenter(centerStack);
 		VBox bottomNode = new VBox();
 		Label head = new Label("Upcoming events");
 		head.setFont(Font.font(STYLESHEET_CASPIAN, 25));
@@ -47,7 +53,7 @@ public class RootClass extends Application {
 	
 		bottomNode.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
 			
-			test.setText("Test");
+			//test.setText("Test");
 			
 			
 		});
