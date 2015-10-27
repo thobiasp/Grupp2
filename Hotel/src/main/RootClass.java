@@ -45,6 +45,7 @@ public class RootClass extends Application {
 		Label stack1 = new Label("Button 2");
 		Label stack2 = new Label("Button 3");
 		Label stack3 = new Label("Button 4");
+		Label upcomingEvents = new Label("Upcoming events");
 		
 		//centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
 		root.setCenter(centerStack);
@@ -66,8 +67,10 @@ public class RootClass extends Application {
 	
 		bottomNode.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
 			currentTime = LocalDateTime.now();
-			bottomNode.getChildren().remove(1);
-			bottomNode.getChildren().add(new Label(" test 1"));
+			//bottomNode.getChildren().remove(1);
+			//bottomNode.getChildren().add(new Label(" test 1"));
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(upcomingEvents);
 			
 			
 		});
