@@ -46,8 +46,10 @@ public class RootClass extends Application {
 		Label stack2 = new Label("Button 3");
 		Label stack3 = new Label("Button 4");
 		
-		centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
+		//centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
 		root.setCenter(centerStack);
+		
+		
 		VBox bottomNode = new VBox();
 		Label head = new Label("Upcoming events");
 		head.setFont(Font.font(STYLESHEET_CASPIAN, 25));
@@ -119,6 +121,28 @@ public class RootClass extends Application {
 		top.getChildren().add(nightView);
 		top.getChildren().add(bpTop);
 		root.setTop(top);
+		
+		
+		//ActionEvents till huvudknapparna
+		food.setOnAction(e -> {
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(stack0);
+		});
+		
+		spa.setOnAction(e -> {
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(stack1);
+		});
+		
+		transport.setOnAction(e -> {
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(stack2);
+		});
+		
+		houseKeeping.setOnAction(e -> {
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(stack3);
+		});
 		
 	}
 
