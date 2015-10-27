@@ -12,7 +12,7 @@ public abstract class Booking extends Room {
 	protected enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
 	protected BType type;
 	
-	private Booking(String name, int roomNum){
+	protected Booking(String name, int roomNum){
 		super(name, roomNum);
 		// change in file
 	}
