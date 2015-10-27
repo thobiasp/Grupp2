@@ -86,14 +86,17 @@ public class RootClass extends Application {
 		root.setBottom(bottomNode);
 		
 		
-		
-
-		BorderPane rootTop = new BorderPane();
+		StackPane top = new StackPane();
+		top.setPrefSize(800, 150);
 		
 		Image night = new Image("images/night.jpg");
 		ImageView nightView = new ImageView(night);
 		nightView.setFitHeight(150);
 		nightView.setFitWidth(800);
+		
+		
+		BorderPane bpTop = new BorderPane();
+		bpTop.setPrefSize(800, 150);
 		
 		HBox buttons = new HBox(10);
 		buttons.setAlignment(Pos.CENTER);
@@ -105,12 +108,17 @@ public class RootClass extends Application {
 		
 		VBox id = new VBox(10);
 		id.setAlignment(Pos.CENTER);
-		Label roomNumber = new Label();
+		Label roomNumber = new Label("237");
+		Label fullName = new Label("Eyvind");
+		Button hKButton = new Button("Cleaning");
+		id.getChildren().addAll(roomNumber, fullName, hKButton);
 		
 		buttons.getChildren().addAll(food, spa, transport, houseKeeping);
-		rootTop.setCenter(nightView);
-		rootTop.setBottom(buttons);
-		root.setTop(rootTop);
+		bpTop.setBottom(buttons);
+		bpTop.setRight(id);
+		top.getChildren().add(nightView);
+		top.getChildren().add(bpTop);
+		root.setTop(top);
 		
 	}
 
