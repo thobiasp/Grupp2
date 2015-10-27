@@ -102,10 +102,9 @@ public class RootClass extends Application {
 		id.getChildren().addAll(roomNumber, fullName, hKButton);
 		
 		buttons.getChildren().addAll(food, spa, transport, houseKeeping);
-		bpTop.setCenter(nightView);
 		bpTop.setBottom(buttons);
 		bpTop.setRight(id);
-		//root.setTop(bpTop);
+		top.getChildren().add(nightView);
 		top.getChildren().add(bpTop);
 		root.setTop(top);
 		
