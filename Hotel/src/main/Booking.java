@@ -15,6 +15,7 @@ public abstract class Booking extends Room {
 	
 	private Booking(String name, int roomNum){
 		super(name, roomNum);
+		// change in file
 	}
 	
 	protected Booking(String name, int roomNum, Date date, Date startTime, Date stopTime, float price, BType type) {
