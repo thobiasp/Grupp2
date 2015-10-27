@@ -1,5 +1,7 @@
 package main;
 
+import java.time.LocalDateTime;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,8 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontSmoothingType;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateTimeStringConverter;
 
 public class RootClass extends Application {
+	
+	LocalDateTime currentTime;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -31,6 +36,7 @@ public class RootClass extends Application {
 		
 
 		
+		
 		StackPane centerStack = new StackPane();
 		Label stack0 = new Label("Button 1");
 		Label stack1 = new Label("Button 2");
@@ -38,7 +44,6 @@ public class RootClass extends Application {
 		Label stack3 = new Label("Button 4");
 		
 		centerStack.getChildren().addAll(stack0,stack1,stack2,stack3);
-		
 		root.setCenter(centerStack);
 		VBox bottomNode = new VBox();
 		Label head = new Label("Upcoming events");
@@ -47,13 +52,17 @@ public class RootClass extends Application {
 		Label test2 = new Label("19:00 Table booked - 4 persons");
 		Label test3 = new Label("21:00 Sauna booked");
 		Label test4 = new Label("23:00 Taxi booked - 4 persons");
+		Label test5 = new Label("add 1");
+		Label test6 = new Label("add 2");
 		bottomNode.getChildren().addAll(head,test1,test2,test3,test4);
+	
 		
 		
 	
 		bottomNode.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
-			
-			//test.setText("Test");
+			currentTime = LocalDateTime.now();
+			bottomNode.getChildren().remove(1);
+			bottomNode.getChildren().add(new Label(currentTime.getHour()+":"+currentTime.getMinute()+":"+currentTime.getSecond()+ " test 1"));
 			
 			
 		});
