@@ -11,9 +11,12 @@ public abstract class Booking extends Room {
 	protected LocalDateTime stopDT; //Datum och tid då eventet slutar
 
 	protected float price;
-	
 	protected enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
 	protected BType type;
+	
+	protected Booking(){
+		super();
+	}
 	
 	protected Booking(String name, int roomNum){
 		super(name, roomNum);
