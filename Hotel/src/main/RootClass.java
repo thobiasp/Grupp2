@@ -1,40 +1,28 @@
 package main;
 
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontSmoothingType;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateTimeStringConverter;
-import main.Booking.BType;
 
 public class RootClass extends Application {
 	
@@ -52,13 +40,12 @@ public class RootClass extends Application {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 		//format to add to TreeMap so treemap can be sorted
 		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 800, 600);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 		
 		TreeMap<String,String>mapForEvents = new TreeMap<>();
 		
@@ -69,15 +56,9 @@ public class RootClass extends Application {
 		
 		
 	
-		
 		//StackPane for 'root' center pane
 		StackPane centerStack = new StackPane();
 		
-		//test labels for testing buttons in 'root' top pane
-		Label stack0 = new Label("Button 1");
-		Label stack1 = new Label("Button 2");
-		Label stack2 = new Label("Button 3");
-		Label stack3 = new Label("Button 4");
 
 
 		//Settings for 'upcoming events' BorderPane
@@ -95,17 +76,6 @@ public class RootClass extends Application {
 		upcomingEvents.setBottom(add);
 		upcomingEvents.setCenter(listOfEvents);
 		upcomingEvents.setLeft(leftOfCenterPane);
-		
-	
-
-		
-		//VBox for bottom pane in 'root' BorderPane
-		VBox bottomVBoxInRoot = new VBox();
-		bottomVBoxInRoot.setPrefHeight(125);
-		Label head = new Label("Upcoming events");
-		
-		head.setFont(Font.font(STYLESHEET_CASPIAN, 25));
-		bottomVBoxInRoot.getChildren().addAll(head);
 	
 		
 		//event for button in 'upcomingEvents' bottom
@@ -127,18 +97,6 @@ public class RootClass extends Application {
 			//adding key:date and value:type  to TreeMap 'mapForEvents'
 			mapForEvents.put(dateToMap,typeToMap);
 			
-			/*
-			Set<Entry<String,String>> set = mapForEvents.entrySet();
-			Iterator<Entry<String, String>> iterator = set.iterator();
-			if(iterator.hasNext()){
-				Entry<String, String> person = iterator.next();
-				String stringOne = person.getKey();
-				String stringTwo = person.getValue();
-				Label one = new Label(stringOne);
-				Label two = new Label(stringTwo);
-				HBox head2= new HBox(one,two);
-				bottomVBoxInRoot.getChildren().add(head2);
-			}*/
 			
 			//events for cancel button
 			cancelButton.setOnAction(event2->{
@@ -152,42 +110,12 @@ public class RootClass extends Application {
 					
 		});
 		
-		
-		
-		
-		//creates mouse event for VBox in root
-		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
 
-			//clears root center and adds BorderPane 'upcomingEvents'
-			centerStack.getChildren().clear();
-			
-			
-		});
-		
-		//makes big label in bottom root VBox change color to GRAY when hovering
-		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_ENTERED, event ->{
-			
-			head.setTextFill(Color.GRAY);
-		});
-		
-		
-		//makes big label in bottom root VBox change color to BLACK when not hovering
-		bottomVBoxInRoot.addEventHandler(MouseEvent.MOUSE_EXITED, event ->{
-			
-			head.setTextFill(Color.BLACK);
-			
-			
-		});
 		
 		root.setCenter(centerStack); 
-		root.setBottom(bottomVBoxInRoot);
-		
 		
 
-		
-		
-		
-		
+
 		StackPane topNode = new StackPane();
 		topNode.setPrefSize(800, 150);
 		
@@ -230,12 +158,13 @@ public class RootClass extends Application {
 				orders.setId("orders");
 				// ID FOR CSS   
 		
-		
+		/*
 		food.setPrefWidth(150);
 		spa.setPrefWidth(150);
 		transport.setPrefWidth(150);
 		houseKeeping.setPrefWidth(150);
 		orders.setPrefWidth(30);
+		*/
 		
 		VBox id = new VBox(10);
 		id.setAlignment(Pos.CENTER);
@@ -297,8 +226,12 @@ public class RootClass extends Application {
 		});
 		
 	}
-
+	
+	
 	public static void main(String[] args) {
 		launch(args);
+
+
+
 	}
 }
