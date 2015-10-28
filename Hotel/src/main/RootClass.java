@@ -123,10 +123,7 @@ public class RootClass extends Application {
 					
 		});
 		
-		
-		
-		
-
+	
 		
 		root.setCenter(centerStack);
 		
