@@ -8,23 +8,20 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class BookATable extends Application {
+public class BookATable {
 
-	@Override
-	public void start(Stage primaryStage) {
-
+		public GridPane getNode() {
+		
 		GridPane root = new GridPane();
 		Scene scene = new Scene(root, 800, 300);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		primaryStage.setTitle("Book A Table");
 
 		DatePicker date = new DatePicker();
 
@@ -79,13 +76,11 @@ public class BookATable extends Application {
 		});
 
 		comBoxPer.setOnAction(e -> {
-
+			
 			labelPpl.setText("People" + comBoxPer.getValue().toString());
 
 		});
-	}
-
-	public static void main(String[] args) {
-		launch(args);
+		return root;
 	}
 }
+
