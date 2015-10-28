@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -64,6 +65,14 @@ public class RootClass extends Application {
 		StackPane centerStack = new StackPane();
 		
 
+		//Test buttons to check items in allBookings
+		Button print = new Button("Print");
+		Button clear = new Button("Clear");
+		TextArea testArea =new TextArea();
+		testArea.setPrefHeight(70);
+		HBox testButtons = new HBox(10);
+		testButtons.getChildren().addAll(print,clear,testArea);
+		root.setBottom(testButtons);
 
 		//Settings for 'upcoming events' BorderPane
 		BorderPane upcomingEvents = new BorderPane();			
@@ -80,6 +89,23 @@ public class RootClass extends Application {
 		upcomingEvents.setBottom(add);
 		upcomingEvents.setCenter(listOfEvents);
 		upcomingEvents.setLeft(leftOfCenterPane);
+		
+		print.setOnAction(event->{
+			for(Booking e:allBookings){
+				
+				String hej = e.getStartDtAsString()+ e.getType().toString();
+				finalText+=hej+"\n";
+			}
+			
+			testArea.setText(finalText);
+		});
+		
+		
+		clear.setOnAction(event->{
+			allBookings.clear();
+			testArea.clear();
+		});
+		
 	
 		
 		//event for button in 'upcomingEvents' bottom
