@@ -38,7 +38,8 @@ public class EnterTransport {
 		// ActionEvents for buttons
 
 		bookTransport.setOnAction(e -> {
-			System.out.println("test1");
+			rootNode.getChildren().clear();
+			//rootNode.getChildren().add(new Transport().getNode());
 		});
 
 		quickBook.setOnAction(e -> {
