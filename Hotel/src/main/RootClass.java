@@ -66,6 +66,7 @@ public class RootClass extends Application {
 		ObservableList<HBox> obj=FXCollections.observableArrayList();
 		ListView<HBox> listOfEvents = new ListView<>(obj);
 		
+		
 	
 		
 		//StackPane for 'root' center pane
