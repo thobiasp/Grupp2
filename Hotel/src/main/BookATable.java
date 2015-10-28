@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -37,9 +38,19 @@ public class BookATable extends Application {
 
 		TextField time = new TextField();
 		TableView<Booking> tableView = new TableView<>();
-		// ObservableList<Booking> ta =
+		TableColumn<Booking, String> dateCol = null;
+		TableColumn<Booking, String> timeCol = null;
+		TableColumn<Booking, Integer> pplCol = null;
 		
-		tableView.setMaxSize(100, 100);
+		dateCol = new TableColumn<Booking, String>();
+		timeCol = new TableColumn<Booking, String>();
+		pplCol = new TableColumn<Booking, Integer>();
+		
+		tableView.getColumns().add(timeCol);
+		tableView.getColumns().add(dateCol);
+		tableView.getColumns().add(pplCol);
+
+		tableView.setMaxSize(400, 100);
 		Label labelD = new Label("Date");
 		Label labelP = new Label("Number of People");
 		Label labelT = new Label("Time");
@@ -54,6 +65,19 @@ public class BookATable extends Application {
 		root.add(comBoxPer, 0, 3);
 		root.add(tableView, 2, 3);
 		root.add(book, 3, 3);
+
+		date.setOnAction(e -> {
+          
+			
+		});
+
+		time.setOnAction(e -> {
+
+		});
+
+		comBoxPer.setOnAction(e -> {
+
+		});
 	}
 
 	public static void main(String[] args) {
