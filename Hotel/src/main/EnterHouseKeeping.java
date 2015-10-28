@@ -37,6 +37,8 @@ public StackPane showButtons(){
 		// ActionEvents for buttons
 
 		requests.setOnAction(e -> {
+			rootNode.getChildren().clear();
+			//rootNode.getChildren().add(new RoomService().getRsNode());
 			
 		});
 
