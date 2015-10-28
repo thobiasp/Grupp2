@@ -5,12 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 
 public class EnterHouseKeeping {
 
-public Group showButtons(){
+public StackPane showButtons(){
 		
-		Group rootNode = new Group();
+		StackPane rootNode = new StackPane();
 		Scene scene = new Scene(rootNode, 800, 300);
 
 		GridPane gp = new GridPane();
@@ -36,7 +37,7 @@ public Group showButtons(){
 		// ActionEvents for buttons
 
 		requests.setOnAction(e -> {
-			System.out.println("test1");
+			
 		});
 
 		clean.setOnAction(e -> {

@@ -6,12 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 
 public class EnterFood {
 
-	public Group showButtons(){
+	public StackPane showButtons(){
 		
-		Group rootNode = new Group();
+		StackPane rootNode = new StackPane();
 		Scene scene = new Scene(rootNode, 800, 300);
 
 		GridPane gp = new GridPane();
