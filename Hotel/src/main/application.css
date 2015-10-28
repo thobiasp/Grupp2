@@ -1,0 +1,78 @@
+.root{
+	-fx-background-color: linear-gradient(#ba8baf, #61a2b1);
+}
+
+.label{
+     -fx-background-color: #DC9656;
+     -fx-text-fill: #FFFFFF;
+     -fx-background-radius: 0;
+     -fx-font-family: "Segoe UI Semibold";
+ }
+
+.button {
+	-fx-text-fill: #FFFFFF;
+}
+ 
+.button:pressed
+{
+  	-fx-button-fill: #1d1d1d;
+}
+
+.button:focused
+{
+    -fx-border-color: white, #00A2E8;
+    -fx-border-width: 2, 2;
+}
+
+.button:hover{
+    -fx-background-color: #883834;
+}
+#food{
+	-fx-background-color: #585858;
+	-fx-background-image: url("/images/foodicon.png");
+	-fx-border-color: white, #00A2E8;
+    -fx-border-width: 2, 3;
+}
+#food:focused {
+	-fx-background-color: #00A2E8;
+}
+#food:hover {
+	-fx-background-color: #282828
+}
+
+#spa {
+	-fx-background-color: #585858;
+	-fx-border-color: white, #00A2E8;
+    -fx-border-width: 2, 2;
+}
+#spa:focused {
+	-fx-background-color: #00A2E8;
+}
+#spa:hover {
+	-fx-background-color: #282828
+}
+
+#transport {
+	-fx-background-color: #585858;
+	-fx-border-color: white, #00A2E8;
+    -fx-border-width: 2, 2;
+}
+#transport:focused {
+	-fx-background-color: #00A2E8;
+}
+#transport:hover {
+	-fx-background-color: #282828
+}
+
+#houseKeeping {
+	-fx-background-color: #585858;
+	-fx-border-color: white, #00A2E8;
+    -fx-border-width: 2, 2;
+}
+#houseKeeping:focused {
+	-fx-background-color: #00A2E8;
+}
+#houseKeeping:hover {
+	-fx-background-color: #282828
+}
+
