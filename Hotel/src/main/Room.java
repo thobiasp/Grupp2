@@ -6,10 +6,12 @@ public abstract class Room {
 	protected int roomNum;
 	
 	protected Room() {
-		
+		this.name = "Light Yagami";
+		this.roomNum=123;
 	}
 	
 	protected Room(String name, int roomNum) {
+		this();
 		this.name = name;
 		this.roomNum = roomNum;
 	}
