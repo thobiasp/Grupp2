@@ -1,9 +1,12 @@
 package main;
 
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -11,16 +14,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class EnterSpa extends Application {
+public class EnterSpa {
 
-	@Override
-	public void start(Stage primaryStage) {
+	public Group showButtons(){
 
-		Group root = new Group();
-		Scene scene = new Scene(root, 800, 300);
-		scene.getStylesheets().add(getClass().getResource("testapp.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		Group rootNode = new Group();
+		Scene scene = new Scene(rootNode, 800, 300);
 
 		GridPane gp = new GridPane();
 		ColumnConstraints column = new ColumnConstraints(400);
@@ -45,8 +44,9 @@ public class EnterSpa extends Application {
 		gp.add(sauna, 0, 1);
 		gp.add(Jacuzzi, 1, 1);
 
-		root.getChildren().add(gp);
+		rootNode.getChildren().add(gp);
 
+		
 		// ActionEvents for buttons
 
 		treatments.setOnAction(e -> {
@@ -64,11 +64,9 @@ public class EnterSpa extends Application {
 		Jacuzzi.setOnAction(e -> {
 			System.out.println("test4");
 		});
+		
+		return rootNode;
+		
 
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 }
