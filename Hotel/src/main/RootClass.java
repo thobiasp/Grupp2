@@ -33,7 +33,7 @@ import javafx.util.Duration;
 
 public class RootClass extends Application {
 	
-
+ 
 	String finalText;
 
 	LocalDateTime currentTime;
@@ -59,6 +59,7 @@ public class RootClass extends Application {
 		
 		//lists for 'upcomingEvents' center pane
 		ObservableList<HBox> obj=FXCollections.observableArrayList();
+		ObservableList<Booking> allBookings=FXCollections.observableArrayList();
 		ListView<HBox> listOfEvents = new ListView<>(obj);
 		
 		
@@ -199,28 +200,33 @@ public class RootClass extends Application {
 		//ActionEvents till huvudknapparna
 		food.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack0);
+			//centerStack.getChildren().add(stack0);
+			centerStack.getChildren().add(new EnterFood().showButtons());
 		});
 		
 		spa.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack1);
+			//centerStack.getChildren().add(stack1);
+			centerStack.getChildren().add(new EnterSpa().showButtons());
 		});
 		
 		transport.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack2);
+			//centerStack.getChildren().add(stack2);
+			centerStack.getChildren().add(new EnterTransport().showButtons());
 		});
 		
 		houseKeeping.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack3);
+			//centerStack.getChildren().add(stack3);
+			centerStack.getChildren().add(new EnterHouseKeeping().showButtons());
 		});
 		
 		
 		orders.setOnAction(e -> {
 			centerStack.getChildren().clear();
 			centerStack.getChildren().add(upcomingEvents);
+			
 		});
 		
 		//ActionEvent till HouseKeeping
