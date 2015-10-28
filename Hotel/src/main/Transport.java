@@ -10,21 +10,22 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class Transport extends Application {
+public class Transport /*extends Application*/ {
 
 	
-	@Override
-	public void start(Stage primaryStage) {
+	//@Override
+	//public void start(Stage primaryStage) {
 		
 	
-		
+		public GridPane getNode() {
 		
 		GridPane root = new GridPane();
 		Scene scene = new Scene(root, 800, 300);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		primaryStage.setTitle("Book A Taxi");
+		//primaryStage.setScene(scene);
+		//primaryStage.show();
+		//primaryStage.setTitle("Book A Taxi");
+		
 		Label labelFr= new Label("From");
 		Label labelTo= new Label("To");
 		Label labelDat= new Label("Date");
@@ -93,14 +94,16 @@ public class Transport extends Application {
 			String value= Float.toString(price);
 			comformprice.setText(value +" $ ");
 		});
-
+		return root;
+		
 
 
 
 		
 	}
-
+/*
 	public static void main(String[] args) {
 		launch(args);
 	}
+	*/
 }
