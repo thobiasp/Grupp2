@@ -38,7 +38,8 @@ public class EnterFood {
 		// ActionEvents for buttons
 
 		bookTable.setOnAction(e -> {
-			System.out.println("test1");
+			rootNode.getChildren().clear();
+			rootNode.getChildren().add(new BookATable().getNode());
 		});
 
 		roomService.setOnAction(e -> {
