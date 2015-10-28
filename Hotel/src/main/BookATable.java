@@ -78,7 +78,7 @@ public class BookATable {
 		comBoxPer.setOnAction(e -> {
 			
 			labelPpl.setText("People" + comBoxPer.getValue().toString());
-
+			
 		});
 		return root;
 	}
