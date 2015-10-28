@@ -159,7 +159,6 @@ public class RootClass extends Application {
 
 			//clears root center and adds BorderPane 'upcomingEvents'
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(upcomingEvents);
 			
 			
 		});
@@ -207,6 +206,8 @@ public class RootClass extends Application {
 		Button spa = new Button("SPA");
 		Button transport = new Button("TRANSPORT");
 		Button houseKeeping = new Button("HOUSEKEEPING");
+		//thobias knapp
+		Button orders = new Button("YOUR ORDERS");
 		
 		//Styles
 //		food.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
@@ -219,11 +220,13 @@ public class RootClass extends Application {
 				spa.setMinSize(180, 30);
 				transport.setMinSize(180, 30);
 				houseKeeping.setMinSize(180, 30);
+				orders.setMinSize(30, 30);
 				
 				food.setId("food");
 				spa.setId("spa");
 				transport.setId("transport");
 				houseKeeping.setId("houseKeeping");
+				orders.setId("orders");
 				// ID FOR CSS   
 		
 		
@@ -231,6 +234,7 @@ public class RootClass extends Application {
 		spa.setPrefWidth(150);
 		transport.setPrefWidth(150);
 		houseKeeping.setPrefWidth(150);
+		orders.setPrefWidth(30);
 		
 		VBox id = new VBox(10);
 		id.setAlignment(Pos.CENTER);
@@ -240,7 +244,7 @@ public class RootClass extends Application {
 		hKButton.setTextFill(Color.GREEN);
 		id.getChildren().addAll(roomNumber, fullName, hKButton);
 		
-		buttons.getChildren().addAll(food, spa, transport, houseKeeping);
+		buttons.getChildren().addAll(food, spa, transport, houseKeeping,orders);
 		bpTop.setBottom(buttons);
 		bpTop.setRight(id);
 		topNode.getChildren().add(nightView);
@@ -267,6 +271,12 @@ public class RootClass extends Application {
 		houseKeeping.setOnAction(e -> {
 			centerStack.getChildren().clear();
 			centerStack.getChildren().add(stack3);
+		});
+		
+		
+		orders.setOnAction(e -> {
+			centerStack.getChildren().clear();
+			centerStack.getChildren().add(upcomingEvents);
 		});
 		
 		//ActionEvent till HouseKeeping
