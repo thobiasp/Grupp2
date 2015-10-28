@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.TreeMap;
 
-import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +31,6 @@ public class RootClass extends Application {
 
 	LocalDateTime currentTime;
 	EnterSpa enterSpa = new EnterSpa();
-	 private Animation animation;   
 	
 
 
@@ -61,11 +59,6 @@ public class RootClass extends Application {
 		//StackPane for 'root' center pane
 		StackPane centerStack = new StackPane();
 		
-		//test labels for testing buttons in 'root' top pane
-		Label stack0 = new Label("Button 1");
-		Label stack1 = new Label("Button 2");
-		Label stack2 = new Label("Button 3");
-		Label stack3 = new Label("Button 4");
 
 
 		//Settings for 'upcoming events' BorderPane
