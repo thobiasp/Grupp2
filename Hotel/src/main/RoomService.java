@@ -1,5 +1,6 @@
 package main;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ListIterator;
@@ -14,12 +15,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import main.Booking.*;
 import main.MenuItem.Types;
 
 public class RoomService {
 	ObservableList<MenuItem> menuData = null;
 	ObservableList<MenuItem> pendingOrder = null;
+	
+	private RoomService(){
+		
+	}
 
 	public BorderPane getRsNode() {
 		BorderPane root = null;
@@ -38,10 +45,14 @@ public class RoomService {
 		TableColumn<MenuItem, String> itemNameCol = null;
 		TableColumn<MenuItem, String> itemDescriptionCol = null;
 		TableColumn<MenuItem, Float> itemPriceCol = null;
+		
+		GridPane itemsView = new GridPane();
 
-		TableView<MenuItem> pendingView = new TableView<>();
+		
 		TableColumn<MenuItem, String> itemNameCol2 = null;
 		TableColumn<MenuItem, Float> itemPriceCol2 = null;
+		
+
 		
 		pendingOrder = FXCollections.observableArrayList();
 		menuData = FXCollections.observableArrayList();
@@ -62,7 +73,7 @@ public class RoomService {
 
 		hbox3.setPrefSize(600, 100);
 		hbox3.setPadding(new Insets(5));
-		hbox3.getChildren().addAll(pendingView, totalLabel);
+		hbox3.getChildren().addAll(itemsView, totalLabel);
 
 		hbox4.setPrefSize(200, 100);
 		hbox4.setPadding(new Insets(10));
@@ -108,18 +119,18 @@ public class RoomService {
 		itemPriceCol2.setEditable(false);
 		itemPriceCol2.setPrefWidth(75);
 		itemPriceCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, Float>("price"));
-
-
-		pendingView.getColumns().add(itemNameCol2);
-		pendingView.getColumns().add(itemPriceCol2);
-		pendingView.getItems().addAll(pendingOrder);
-		pendingView.setItems(pendingOrder);
-
+		
+		
+		
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
 		root.setBottom(hbox5);
 		
+		//LocalDateTime createdDT, LocalDateTime startDT, BType type
 		placeOrder.setOnAction((event) -> {
+			LocalDateTime now = LocalDateTime.now();
+			///
+			
 			
 		});
 
@@ -129,24 +140,7 @@ public class RoomService {
 				pendingOrder.add(item);
 			}
 		});
-		pendingView.setOnMouseClicked(event -> {
-			MenuItem item = menuView.getSelectionModel().getSelectedItem();
-			if (item != null) {
-				pendingOrder.remove(item);
-			}
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					ListIterator<MenuItem> it = pendingOrder.listIterator();
-					float theTotal = 0f;
-					while (it.hasNext()) {
-						MenuItem next = it.next();
-						theTotal += next.getPrice();
-					}
-					totalLabel.setText("Your total:  " + theTotal);
-				}
-			});
-		});
+		
 		return root;
 		
 		/*
