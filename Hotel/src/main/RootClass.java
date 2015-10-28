@@ -38,7 +38,13 @@ import main.Booking.BType;
 
 public class RootClass extends Application {
 	
+
 	String finalText;
+
+	LocalDateTime currentTime;
+	EnterSpa enterSpa = new EnterSpa();
+	
+
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -50,7 +56,7 @@ public class RootClass extends Application {
 		
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 800, 600);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("testapp.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -70,7 +76,7 @@ public class RootClass extends Application {
 		Label stack1 = new Label("Button 2");
 		Label stack2 = new Label("Button 3");
 		Label stack3 = new Label("Button 4");
-		
+
 
 		//Settings for 'upcoming events' BorderPane
 		BorderPane upcomingEvents = new BorderPane();			
@@ -181,8 +187,8 @@ public class RootClass extends Application {
 		
 		
 		
-		StackPane top = new StackPane();
-		top.setPrefSize(800, 150);
+		StackPane topNode = new StackPane();
+		topNode.setPrefSize(800, 150);
 		
 		Image night = new Image("images/night.jpg");
 		ImageView nightView = new ImageView(night);
@@ -201,19 +207,34 @@ public class RootClass extends Application {
 		Button transport = new Button("TRANSPORT");
 		Button houseKeeping = new Button("HOUSEKEEPING");
 		
+		//Styles
+		food.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+		spa.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+		transport.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+		houseKeeping.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+		
+	   
+		
+		
+		food.setPrefWidth(150);
+		spa.setPrefWidth(150);
+		transport.setPrefWidth(150);
+		houseKeeping.setPrefWidth(150);
+		
 		VBox id = new VBox(10);
 		id.setAlignment(Pos.CENTER);
-		Label roomNumber = new Label("237");
-		Label fullName = new Label("Eyvind");
-		Button hKButton = new Button("Cleaning");
+		Label roomNumber = new Label("ROOM: 237");
+		Label fullName = new Label("No Name");
+		Button hKButton = new Button("Housekeeping");
+		hKButton.setTextFill(Color.GREEN);
 		id.getChildren().addAll(roomNumber, fullName, hKButton);
 		
 		buttons.getChildren().addAll(food, spa, transport, houseKeeping);
 		bpTop.setBottom(buttons);
 		bpTop.setRight(id);
-		top.getChildren().add(nightView);
-		top.getChildren().add(bpTop);
-		root.setTop(top);
+		topNode.getChildren().add(nightView);
+		topNode.getChildren().add(bpTop);
+		root.setTop(topNode);
 		
 		
 		//ActionEvents till huvudknapparna
@@ -235,6 +256,17 @@ public class RootClass extends Application {
 		houseKeeping.setOnAction(e -> {
 			centerStack.getChildren().clear();
 			centerStack.getChildren().add(stack3);
+		});
+		
+		//ActionEvent till HouseKeeping
+		hKButton.setOnAction(e -> {
+			if (hKButton.getText().equals("Housekeeping")){
+				hKButton.setText("Do not disturb");
+				hKButton.setTextFill(Color.RED);
+			} else {
+				hKButton.setText("Housekeeping");
+				hKButton.setTextFill(Color.GREEN);
+			}
 		});
 		
 	}
