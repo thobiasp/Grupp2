@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class RootClass extends Application {
 	
  
-	String finalText;
+	String finalText = "";
 
 	LocalDateTime currentTime;
 	EnterSpa enterSpa = new EnterSpa();
@@ -103,6 +103,7 @@ public class RootClass extends Application {
 		
 		clear.setOnAction(event->{
 			allBookings.clear();
+			finalText = "";
 			testArea.clear();
 		});
 		
