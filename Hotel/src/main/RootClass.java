@@ -186,7 +186,7 @@ public class RootClass extends Application {
 		root.setTop(topNode);
 		
 		
-		//----------- ActionEvents till huvudknapparna (FOOD, SPA, TRANSPORT, HOUSEKEEPING)
+		//ActionEvents till huvudknapparna
 		food.setOnAction(e -> {
 			centerStack.getChildren().clear();
 			//centerStack.getChildren().add(stack0);
@@ -228,7 +228,7 @@ public class RootClass extends Application {
 				hKButton.setTextFill(Color.GREEN);
 			}
 		});
-		//-----------------------
+		
 	}
 	
 	
