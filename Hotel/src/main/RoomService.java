@@ -2,17 +2,12 @@ package main;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.TreeMap;
-
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -20,62 +15,59 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import main.MenuItem.Types;
 
-public class RoomService extends Application {
+public class RoomService {
+	ObservableList<MenuItem> menuData = null;
+	ObservableList<MenuItem> pendingOrder = null;
 
-	private ObservableList<MenuItem> menuData = null;
-	private ObservableList<MenuItem> pendingOrder = null;
-	Label totalLabel = new Label("Your total: ");
-	Float total = 0f;
+	public BorderPane getRsNode() {
+		BorderPane root = null;
+		Label totalLabel = new Label("Your total: ");
 
-	@Override
-	public void start(Stage primaryStage) {
-
-		BorderPane root = new BorderPane();
-		Scene scene = new Scene(root);
+		root = new BorderPane();
+		// Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
 		HBox hbox3 = new HBox();
 		HBox hbox4 = new HBox();
 		HBox hbox5 = new HBox();
 		Label menuLabel = new Label("Room Service Menu");
+
 		TableView<MenuItem> menuView = new TableView<>();
 		TableColumn<MenuItem, String> itemNameCol = null;
 		TableColumn<MenuItem, String> itemDescriptionCol = null;
 		TableColumn<MenuItem, Float> itemPriceCol = null;
+
 		TableView<MenuItem> pendingView = new TableView<>();
 		TableColumn<MenuItem, String> itemNameCol2 = null;
 		TableColumn<MenuItem, Float> itemPriceCol2 = null;
 		
-		Button placeOrder = new Button("Place your order");
 		pendingOrder = FXCollections.observableArrayList();
 		menuData = FXCollections.observableArrayList();
-		TreeMap<Float,MenuItem> itemsOrdered = new TreeMap<>();
+		Button placeOrder = new Button("Place your order");
+		//LinkedList<MenuItem> itemsOrdered = new LinkedList<>();
 
-		primaryStage.setTitle("Room Service");
-		scene.getStylesheets().addAll(this.getClass().getResource("roomService.css").toExternalForm());
 		root.setPrefSize(800, 300);
 		BorderPane.setMargin(hbox1, new Insets(5, 5, 5, 5));
 
 		hbox1.getChildren().add(menuLabel);
-		hbox1.setPrefSize(800, 30);
+		hbox1.setPrefSize(800, 20);
 		hbox1.setAlignment(Pos.CENTER_LEFT);
 		hbox1.setPadding(new Insets(5));
 
-		hbox2.setPrefSize(800, 220);
+		hbox2.setPrefSize(800, 230);
 		hbox2.setPadding(new Insets(5));
 		hbox2.getChildren().add(menuView);
 
 		hbox3.setPrefSize(600, 100);
 		hbox3.setPadding(new Insets(5));
-		hbox3.getChildren().add(pendingView); //List of orders to place goes here.
+		hbox3.getChildren().addAll(pendingView, totalLabel);
 
 		hbox4.setPrefSize(200, 100);
 		hbox4.setPadding(new Insets(10));
 		hbox4.getChildren().add(placeOrder);
-		this.populateMenu(10);
+		this.populateMenu(10, menuData);
 
 		hbox5.setPrefSize(800, 100);
 		hbox5.setPadding(new Insets(5));
@@ -104,11 +96,11 @@ public class RoomService extends Application {
 		menuView.getColumns().add(itemPriceCol);
 		menuView.getItems().addAll(menuData);
 		menuView.setItems(menuData);
-		
+
 		itemNameCol2 = new TableColumn<>("");
 		itemNameCol2.setResizable(false);
 		itemNameCol2.setEditable(false);
-		itemNameCol2.setPrefWidth(200);
+		itemNameCol2.setPrefWidth(125);
 		itemNameCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
 
 		itemPriceCol2 = new TableColumn<>("Price");
@@ -116,6 +108,7 @@ public class RoomService extends Application {
 		itemPriceCol2.setEditable(false);
 		itemPriceCol2.setPrefWidth(75);
 		itemPriceCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, Float>("price"));
+
 
 		pendingView.getColumns().add(itemNameCol2);
 		pendingView.getColumns().add(itemPriceCol2);
@@ -125,38 +118,53 @@ public class RoomService extends Application {
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
 		root.setBottom(hbox5);
-
-		primaryStage.setScene(scene);
-		primaryStage.show();
 		
-        menuView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-        	MenuItem item = menuView.getSelectionModel().getSelectedItem();
-            if (item != null) {
-                pendingOrder.add(item);
-            }
-        });
-        
-        pendingView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-        	MenuItem item = menuView.getSelectionModel().getSelectedItem();
-            if (item != null) {
-                pendingOrder.remove(item);
-            }
-            	Platform.runLater(new Runnable() {
-        			@Override
-        			public void run() {
-        				ListIterator<MenuItem> it = pendingOrder.listIterator();
-        				float theTotal = 0f;
-        				while (it.hasNext()){
-        					MenuItem next = it.next();
-        					theTotal += next.getPrice();
-        				}
-        				totalLabel.setText("Your total :" + theTotal);	
-        			}
-        		});
-        });
+		placeOrder.setOnAction((event) -> {
+			
+		});
+
+		menuView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+			MenuItem item = menuView.getSelectionModel().getSelectedItem();
+			if (item != null) {
+				pendingOrder.add(item);
+			}
+		});
+		pendingView.setOnMouseClicked(event -> {
+			MenuItem item = menuView.getSelectionModel().getSelectedItem();
+			if (item != null) {
+				pendingOrder.remove(item);
+			}
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					ListIterator<MenuItem> it = pendingOrder.listIterator();
+					float theTotal = 0f;
+					while (it.hasNext()) {
+						MenuItem next = it.next();
+						theTotal += next.getPrice();
+					}
+					totalLabel.setText("Your total:  " + theTotal);
+				}
+			});
+		});
+		return root;
+		
+		/*
+		 * pendingView.getSelectionModel().selectedItemProperty().addListener((
+		 * observableValue, oldValue, newValue) -> { MenuItem item =
+		 * menuView.getSelectionModel().getSelectedItem(); if (item != null) {
+		 * pendingOrder.remove(item); } Platform.runLater(new Runnable() {
+		 * 
+		 * @Override public void run() { ListIterator<MenuItem> it =
+		 * pendingOrder.listIterator(); float theTotal = 0f; while
+		 * (it.hasNext()){ MenuItem next = it.next(); theTotal +=
+		 * next.getPrice(); } totalLabel.setText("Your total:  " + theTotal); }
+		 * }); });
+		 */
+
 	}
 
-	private void populateMenu(int numItems) {
+	public void populateMenu(int numItems, ObservableList<MenuItem> menuData) {
 		MenuItem food = null;
 		MenuItem drink = null;
 		for (int i = 1; i <= numItems; i++) {
@@ -170,7 +178,4 @@ public class RoomService extends Application {
 		Collections.sort(menuData, byType);
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

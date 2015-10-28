@@ -1,19 +1,15 @@
 package main;
 
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class MenuItem {
 
 	enum Types {
 		FOOD, DRINK
 	}
-
 	private Types type;
 	private String name;
 	private String description;
 	private float price;
+	
 	public MenuItem(Types type, String name, String description, float price) {
 		super();
 		this.type = type;
@@ -45,6 +41,4 @@ public class MenuItem {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
-	
 }
