@@ -1,14 +1,13 @@
 package main;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.ListIterator;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,47 +16,44 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import main.Booking.*;
 import main.MenuItem.Types;
 
-public class RoomService {
+public class RoomServiceNode  {
+
 	ObservableList<MenuItem> menuData = null;
 	ObservableList<MenuItem> pendingOrder = null;
+	float bookingTotal = 0f;
+	BorderPane root = null;
 	
-	private RoomService(){
-		super();
-	}
-
 	public BorderPane getRsNode() {
 		BorderPane root = null;
+		Scene scene = new Scene(root, 800, 400);
 		Label totalLabel = new Label("Your total: ");
 
 		root = new BorderPane();
-		//Scene scene = new Scene(root);
+		// Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
 		HBox hbox3 = new HBox();
 		HBox hbox4 = new HBox();
 		HBox hbox5 = new HBox();
 		Label menuLabel = new Label("Room Service Menu");
-
+		
 		TableView<MenuItem> menuView = new TableView<>();
 		TableColumn<MenuItem, String> itemNameCol = null;
 		TableColumn<MenuItem, String> itemDescriptionCol = null;
 		TableColumn<MenuItem, Float> itemPriceCol = null;
-		
+
 		GridPane itemsView = new GridPane();
-
-		
-		TableColumn<MenuItem, String> itemNameCol2 = null;
-		TableColumn<MenuItem, Float> itemPriceCol2 = null;
-		
-
+		final Button deleteB = new Button("Delete");
 		
 		pendingOrder = FXCollections.observableArrayList();
 		menuData = FXCollections.observableArrayList();
+		//Till Pontus ;)
+		//***************KNAPP**********************************
 		Button placeOrder = new Button("Place your order");
-		//LinkedList<MenuItem> itemsOrdered = new LinkedList<>();
+		//***************KNAPP**********************************
+		// Se längre neråt för knapp kod
 
 		root.setPrefSize(800, 300);
 		BorderPane.setMargin(hbox1, new Insets(5, 5, 5, 5));
@@ -96,7 +92,7 @@ public class RoomService {
 		itemDescriptionCol.setPrefWidth(625);
 		itemDescriptionCol.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("description"));
 
-		itemPriceCol = new TableColumn<>("Price");
+		itemPriceCol = new TableColumn<>("");
 		itemPriceCol.setResizable(false);
 		itemPriceCol.setEditable(false);
 		itemPriceCol.setPrefWidth(75);
@@ -107,58 +103,54 @@ public class RoomService {
 		menuView.getColumns().add(itemPriceCol);
 		menuView.getItems().addAll(menuData);
 		menuView.setItems(menuData);
+		
+		itemsView.setAlignment(Pos.CENTER_LEFT);
+		itemsView.setPadding(new Insets(5));
+		itemsView.setPrefWidth(600);
+		itemsView.setPrefSize(600, 100);
 
-		itemNameCol2 = new TableColumn<>("");
-		itemNameCol2.setResizable(false);
-		itemNameCol2.setEditable(false);
-		itemNameCol2.setPrefWidth(125);
-		itemNameCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
+		deleteB.setPrefSize(40, 25);
 
-		itemPriceCol2 = new TableColumn<>("Price");
-		itemPriceCol2.setResizable(false);
-		itemPriceCol2.setEditable(false);
-		itemPriceCol2.setPrefWidth(75);
-		itemPriceCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, Float>("price"));
-		
-		
-		
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
 		root.setBottom(hbox5);
+	
+//******Kole*************
+		root.setId("huvudPane");
+		hbox1.setId("hbox1");
+		hbox2.setId("hbox2");
+		hbox3.setId("hbox3");
+		hbox4.setId("hbox4");
+		hbox5.setId("hbox5");
+		menuLabel.setId("menuLabel");
+		totalLabel.setId("totalLabel");
+		menuView.setId("menuView");
+		itemNameCol.setId("menuCol_1");
+		itemDescriptionCol.setId("menuCol_2");
+		itemPriceCol.setId("menuCol_3");
+		itemsView.setId("itemsView");//GridPane som fungerar som en vy
+		placeOrder.setId("orderButton");
 		
-		//LocalDateTime createdDT, LocalDateTime startDT, BType type
-		placeOrder.setOnAction((event) -> {
-			
-			LocalDateTime nu = LocalDateTime.now();
-			
-			///
+		
 
+
+		// ***************KNAPP KOD ********************************
+		placeOrder.setOnAction((event) -> {
+			ArrayList<MenuItem> items = (ArrayList<MenuItem>) new ArrayList<MenuItem>(pendingOrder);
+			Booking rs = new RoomServiceBooking(items,bookingTotal);
+			RootClass.addBooking(rs);
 		});
+		// ***************KNAPP KOD ********************************
 
 		menuView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
 			MenuItem item = menuView.getSelectionModel().getSelectedItem();
 			if (item != null) {
 				pendingOrder.add(item);
+				this.bookingTotal += item.getPrice();
 			}
-		});
-		
+		});	
 		return root;
-		
-		/*
-		 * pendingView.getSelectionModel().selectedItemProperty().addListener((
-		 * observableValue, oldValue, newValue) -> { MenuItem item =
-		 * menuView.getSelectionModel().getSelectedItem(); if (item != null) {
-		 * pendingOrder.remove(item); } Platform.runLater(new Runnable() {
-		 * 
-		 * @Override public void run() { ListIterator<MenuItem> it =
-		 * pendingOrder.listIterator(); float theTotal = 0f; while
-		 * (it.hasNext()){ MenuItem next = it.next(); theTotal +=
-		 * next.getPrice(); } totalLabel.setText("Your total:  " + theTotal); }
-		 * }); });
-		 */
-
 	}
-
 	public void populateMenu(int numItems, ObservableList<MenuItem> menuData) {
 		MenuItem food = null;
 		MenuItem drink = null;
