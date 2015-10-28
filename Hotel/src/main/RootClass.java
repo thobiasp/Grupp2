@@ -31,7 +31,11 @@ public class RootClass extends Application {
 
 	LocalDateTime currentTime;
 	EnterSpa enterSpa = new EnterSpa();
+	public static ObservableList<Booking>allBookings=FXCollections.observableArrayList();
 	
+	public static void addBooking(Booking b){
+		allBookings.add(b);
+	}
 
 
 	@Override
@@ -51,7 +55,7 @@ public class RootClass extends Application {
 		
 		//lists for 'upcomingEvents' center pane
 		ObservableList<HBox> obj=FXCollections.observableArrayList();
-		ObservableList<Booking> allBookings=FXCollections.observableArrayList();
+		
 		ListView<HBox> listOfEvents = new ListView<>(obj);
 		
 		
