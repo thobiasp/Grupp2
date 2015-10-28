@@ -208,12 +208,22 @@ public class RootClass extends Application {
 		Button houseKeeping = new Button("HOUSEKEEPING");
 		
 		//Styles
-		food.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
-		spa.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
-		transport.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
-		houseKeeping.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+//		food.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+//		spa.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+//		transport.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
+//		houseKeeping.setStyle("-fx-opacity: 0.7; -fx-color: rgb(168,0,0); -fx-font-weight: bold;");
 		
-	   
+				// ID FOR CSS
+				food.setMinSize(180, 30);
+				spa.setMinSize(180, 30);
+				transport.setMinSize(180, 30);
+				houseKeeping.setMinSize(180, 30);
+				
+				food.setId("food");
+				spa.setId("spa");
+				transport.setId("transport");
+				houseKeeping.setId("houseKeeping");
+				// ID FOR CSS   
 		
 		
 		food.setPrefWidth(150);
