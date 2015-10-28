@@ -1,0 +1,58 @@
+.root{
+	-fx-background-color: linear-gradient(#ba8baf, #61a2b1);
+
+	-fx-background-color: "white";
+}
+
+.label{
+     -fx-background-color: #DC9656;
+     -fx-text-fill: #FFFFFF;
+     -fx-background-radius: 0;
+     -fx-font-family: "Segoe UI Semibold";
+ }
+
+.button {
+	
+	-fx-text-fill: #FFFFFF;
+	-fx-background-radius: 0;
+	
+}
+
+#food {
+	-fx-background-color: #86c1b9;
+}
+ 
+.button:hover{
+    -fx-background-color: #3a3a3a;
+}
+ 
+.button:pressed
+{
+  	-fx-text-fill: #1d1d1d;
+}
+
+.button:focused
+{
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+
+}
+
+#spa {
+	-fx-background-color: #A1B56c;
+}
+
+#transport {
+	-fx-background-color: #AB4642;
+}
+
+#houseKeeping {
+	-fx-background-color: #f7ca88;
+}
+
+
+.button:hover{
+    -fx-background-color: #883834;
+}
