@@ -179,7 +179,7 @@ public class RootClass extends Application {
 			
 		});
 		
-		root.setCenter(centerStack);
+		root.setCenter(centerStack); 
 		root.setBottom(bottomVBoxInRoot);
 		
 		
