@@ -35,9 +35,13 @@ public class OldRoomService extends Booking {
 	ObservableList<MenuItem> pendingOrder = null;
 	float bookingTotal = 0f;
 	BorderPane root = null;
+	
+	public OldRoomService(){
+		super(LocalDateTime.now(), LocalDateTime.now(), BType.FOOD_DRINK);
+	}
 
-	private OldRoomService(LocalDateTime createdDT, LocalDateTime startDT, BType type, ArrayList<MenuItem> items, float bookingTotal) {
-		super(createdDT, startDT, type);
+	private OldRoomService(ArrayList<MenuItem> items, float bookingTotal) {
+		this();
 	}
 
 	public BorderPane getRsNode(){
@@ -138,9 +142,8 @@ public class OldRoomService extends Booking {
 
 		// ***************KNAPP KOD ********************************
 		placeOrder.setOnAction((event) -> {
-			LocalDateTime nu = LocalDateTime.now();
 			ArrayList<MenuItem> items = (ArrayList<MenuItem>) new ArrayList<MenuItem>(pendingOrder);
-			Booking rs = new OldRoomService(nu, nu, BType.FOOD_DRINK,items,bookingTotal);
+			Booking rs = new OldRoomService(items,bookingTotal);
 			RootClass.addBooking(rs);
 		});
 		// ***************KNAPP KOD ********************************
