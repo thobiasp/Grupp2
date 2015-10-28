@@ -39,7 +39,7 @@ public class EnterTransport {
 
 		bookTransport.setOnAction(e -> {
 			rootNode.getChildren().clear();
-			//rootNode.getChildren().add(new Transport().getNode());
+			rootNode.getChildren().add(new Transport().getNode());
 		});
 
 		quickBook.setOnAction(e -> {
