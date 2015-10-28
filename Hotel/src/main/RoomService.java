@@ -26,7 +26,7 @@ public class RoomService {
 		Label totalLabel = new Label("Your total: ");
 
 		root = new BorderPane();
-		// Scene scene = new Scene(root);
+		//Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
 		HBox hbox3 = new HBox();

@@ -38,8 +38,10 @@ public class Transport extends Application {
 		Label comformto= new Label();
 		Label comformdate= new Label();
 		Label comformtime= new Label();
-		HBox hbox= new HBox(10);
-		hbox.getChildren().addAll(comformfr,comformto,comformdate,comformtime);
+		Label comformprice=new Label();
+		float price= 35f;
+		HBox hbox= new HBox();
+		hbox.getChildren().addAll(comformfr,comformto,comformdate,comformtime,comformprice);
 		root.setHgap(10);
 		root.setVgap(10);
 
@@ -60,7 +62,7 @@ public class Transport extends Application {
 		time.setDisable(true);
 		from.setOnAction(event->{
 			to.setDisable(false);
-			comformfr.setText(from.getText().toString());
+			comformfr.setText(" From "+from.getText().toString());
 			
 		});
 		
@@ -68,7 +70,7 @@ public class Transport extends Application {
 	    
 		to.setOnAction(event->{
 			date.setDisable(false);
-			comformto.setText(to.getText().toString());
+			comformto.setText( " To "+to.getText().toString());
 			
 		});
 		
@@ -76,7 +78,7 @@ public class Transport extends Application {
 		
 		date.setOnAction(event->{
 			time.setDisable(false);
-			comformdate.setText(date.getValue().toString());
+			comformdate.setText(" "+date.getValue().toString());
 			
 		});
 		
@@ -86,8 +88,10 @@ public class Transport extends Application {
 
 		time.setOnAction(event->{
 		
-			comformtime.setText(time.getText().toString());
+			comformtime.setText(" "+time.getText().toString()+" ");
 			
+			String value= Float.toString(price);
+			comformprice.setText(value +" $ ");
 		});
 
 
