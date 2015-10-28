@@ -120,7 +120,6 @@ public class RoomService {
 		root.setBottom(hbox5);
 		
 		placeOrder.setOnAction((event) -> {
-			
 		});
 
 		menuView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
