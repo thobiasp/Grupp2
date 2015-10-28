@@ -255,7 +255,8 @@ public class RootClass extends Application {
 		//ActionEvents till huvudknapparna
 		food.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack0);
+			//centerStack.getChildren().add(stack0);
+			centerStack.getChildren().add(new EnterFood().showButtons());
 		});
 		
 		spa.setOnAction(e -> {
@@ -266,18 +267,21 @@ public class RootClass extends Application {
 		
 		transport.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack2);
+			//centerStack.getChildren().add(stack2);
+			centerStack.getChildren().add(new EnterTransport().showButtons());
 		});
 		
 		houseKeeping.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack3);
+			//centerStack.getChildren().add(stack3);
+			centerStack.getChildren().add(new EnterHouseKeeping().showButtons());
 		});
 		
 		
 		orders.setOnAction(e -> {
 			centerStack.getChildren().clear();
 			centerStack.getChildren().add(upcomingEvents);
+			
 		});
 		
 		//ActionEvent till HouseKeeping
