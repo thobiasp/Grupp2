@@ -1,6 +1,5 @@
 package main;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -8,17 +7,18 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+
+import com.sun.tools.hat.internal.model.Root;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class BookATable {
 
-		public GridPane getNode() {
-		
+	public GridPane getNode() {
+
 		GridPane root = new GridPane();
 		Scene scene = new Scene(root, 800, 300);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -57,12 +57,8 @@ public class BookATable {
 		root.add(comBoxPer, 0, 3);
 		root.add(book, 3, 3);
 
-		time.setDisable(true);
-		comBoxPer.setDisable(true);
-
 		date.setOnAction(e -> {
 
-			time.setDisable(false);
 			labelDate.setText(date.getValue().toString());
 
 		});
@@ -71,16 +67,21 @@ public class BookATable {
 
 			if (e.getCode().equals(KeyCode.ENTER)) {
 				labelTime.setText(time.getText());
-				comBoxPer.setDisable(false);
+
 			}
 		});
 
 		comBoxPer.setOnAction(e -> {
-			
+
 			labelPpl.setText("People" + comBoxPer.getValue().toString());
 
+		});
+
+		
+		book.setOnAction(e -> {
+        // RootClass.addBooking(b);
+			
 		});
 		return root;
 	}
 }
-
