@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import javafx.animation.Animation;
-import javafx.animation.PauseTransitionBuilder;
-import javafx.animation.SequentialTransitionBuilder;
-import javafx.animation.TranslateTransitionBuilder;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,15 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class RootClass extends Application {
 	
@@ -122,8 +116,6 @@ public class RootClass extends Application {
 			});
 					
 		});
-		
-	
 		
 		root.setCenter(centerStack);
 		
