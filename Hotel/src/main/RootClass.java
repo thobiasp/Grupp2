@@ -38,7 +38,7 @@ import main.Booking.BType;
 
 public class RootClass extends Application {
 	
-
+ 
 	String finalText;
 
 	LocalDateTime currentTime;
@@ -245,7 +245,8 @@ public class RootClass extends Application {
 		
 		spa.setOnAction(e -> {
 			centerStack.getChildren().clear();
-			centerStack.getChildren().add(stack1);
+			//centerStack.getChildren().add(stack1);
+			centerStack.getChildren().add(new EnterSpa().showButtons());
 		});
 		
 		transport.setOnAction(e -> {
