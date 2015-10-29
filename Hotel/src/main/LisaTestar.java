@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -32,9 +33,11 @@ public class LisaTestar extends Application {
 	float bookingTotal = 0f;
 	BorderPane root = null;
 	Label totalLabel = new Label("Your total: ");
+	GridPane itemsView = null;
 	Label itemName = null;
 	Label itemPrice = null;
 	Button deleteB = null;
+	Label deleteL = null;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -42,7 +45,8 @@ public class LisaTestar extends Application {
 		Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
-		HBox hbox3 = new HBox();
+		//HBox hbox3 = new HBox();
+		FlowPane fPane = new FlowPane();
 		HBox hbox4 = new HBox();
 		HBox hbox5 = new HBox();
 		Label menuLabel = new Label("Room Service Menu");
@@ -99,24 +103,18 @@ public class LisaTestar extends Application {
 		menuView.getItems().addAll(menuData);
 		menuView.setItems(menuData);
 
-		GridPane itemsView = new GridPane();
+		itemsView = new GridPane();
 		itemsView.setAlignment(Pos.CENTER_LEFT);
 		itemsView.setPadding(new Insets(5));
 		itemsView.setPrefWidth(600);
 		itemsView.setPrefSize(600, 100);
 
-		hbox3.setPrefSize(600, 100);
-		hbox3.setPadding(new Insets(5));
-		hbox3.getChildren().add(itemsView);
+		fPane.setPrefSize(600, 100);
+		fPane.setPadding(new Insets(5));
+		fPane.getChildren().add(itemsView);
 		hbox5.setPrefSize(800, 100);
 		hbox5.setPadding(new Insets(5));
-		hbox5.getChildren().addAll(hbox3, hbox4);
-		for (int col = 0; col <= 3; col++) {
-			RowConstraints row = new RowConstraints();
-			Button b = new Button("Delete");
-			b.setPrefSize(40, 25);
-			itemsView.getRowConstraints().add(row);
-		}
+		hbox5.getChildren().addAll(fPane, hbox4);
 
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
@@ -124,11 +122,11 @@ public class LisaTestar extends Application {
 
 		// ******Kole*************
 		root.setId("huvudPane");
-		hbox1.setId("hbox1");
-		hbox2.setId("hbox2");
-		hbox3.setId("hbox3");
-		hbox4.setId("hbox4");
-		hbox5.setId("hbox5");
+		hbox1.setId("topBox");
+		hbox2.setId("menuBox");
+		fPane.setId("itemViewPane");
+		hbox4.setId("sendOrderBox");
+		hbox5.setId("bottomBox");
 		menuLabel.setId("menuLabel");
 		totalLabel.setId("totalLabel");
 		menuView.setId("menuView");
@@ -145,7 +143,9 @@ public class LisaTestar extends Application {
 		placeOrder.setOnAction((event) -> {
 			ArrayList<MenuItem> items = (ArrayList<MenuItem>) new ArrayList<MenuItem>(pendingOrder);
 			Booking rs = new RoomServiceBooking(items, bookingTotal);
+			pendingOrder.clear();
 			RootClass.addBooking(rs);
+			System.out.println("Booking added");
 		});
 		// ***************KNAPP KOD ********************************
 
@@ -153,6 +153,7 @@ public class LisaTestar extends Application {
 			MenuItem item = menuView.getSelectionModel().getSelectedItem();
 			if (item != null) {
 				pendingOrder.add(item);
+				this.reConstructGridPane();
 				this.bookingTotal += item.getPrice();
 			}
 		});
@@ -172,34 +173,48 @@ public class LisaTestar extends Application {
 		Collections.sort(menuData, byType);
 	}
 
-	private GridPane reConstructGridPane(GridPane gp) {
-		gp.setAlignment(Pos.CENTER_LEFT);
-		// (Node child,int columnIndex,int rowIndex,int columnspan,int rowspan,
+	private void reConstructGridPane() {
+		itemsView.setAlignment(Pos.CENTER_LEFT);
 		// HPos halignment, VPos valignment, Priority hgrow,Priority vgrow)
 		RowConstraints row = new RowConstraints();
 		ColumnConstraints itemCol = new ColumnConstraints();
 		ColumnConstraints priceCol = new ColumnConstraints();
-		ColumnConstraints buttonCol = new ColumnConstraints();
+		ColumnConstraints deleteCol = new ColumnConstraints();
 		itemCol.setPercentWidth(50);
 		priceCol.setPercentWidth(25);
-		buttonCol.setPercentWidth(25);
+		deleteCol.setPercentWidth(25);
 		itemCol.setHgrow(Priority.NEVER);
 		priceCol.setHgrow(Priority.NEVER);
-		buttonCol.setHgrow(Priority.NEVER);
-		
-		gp.getColumnConstraints().addAll(itemCol, priceCol, buttonCol);
+		deleteCol.setHgrow(Priority.NEVER);
+
+		itemsView.getColumnConstraints().addAll(itemCol, priceCol, deleteCol);
 		MenuItem mi = new MenuItem();
 		ListIterator<MenuItem> it = pendingOrder.listIterator();
 		int iRow = 0;
-		while (it.hasNext()) {
-			for (int iCol = 0; iCol < 3; iCol++) {
-				mi = it.next();
-				row.setPercentHeight(25);
-				gp.getRowConstraints().add(row);
-			}
+		do {
+			//new instances of each node
+			itemName = new Label();
+			itemPrice = new Label();
+			deleteB = new Button("Delete");
+			deleteL = new Label("Delete");
+			//prevent all nodes from changing size
+			GridPane.setVgrow(itemName, Priority.NEVER);
+			GridPane.setVgrow(itemPrice, Priority.NEVER);
+			GridPane.setVgrow(deleteB, Priority.NEVER);
+			GridPane.setHgrow(itemName, Priority.NEVER);
+			GridPane.setHgrow(itemPrice, Priority.NEVER);
+			GridPane.setHgrow(deleteB, Priority.NEVER);
+			//each node-type is assigned to a column
+			GridPane.setColumnIndex(itemName, 0);
+			GridPane.setColumnIndex(itemPrice, 1);
+			GridPane.setColumnIndex(deleteB, 2);
+			//fill each row-cell with current data.
+			mi = it.next();
+			itemName.setText(mi.getName());
+			itemPrice.setText(Float.valueOf(mi.getPrice()).toString());
+			itemsView.addRow(iRow, itemName, itemPrice, deleteL);
 			iRow++;
-		}
-		return gp;
+		} while (it.hasNext());
 	}
 
 	public static void main(String[] args) {
