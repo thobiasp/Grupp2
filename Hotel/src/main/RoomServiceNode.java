@@ -26,11 +26,11 @@ public class RoomServiceNode  {
 	BorderPane root = null;
 	
 	public BorderPane getRsNode() {
-		BorderPane root = null;
+		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 800, 400);
 		Label totalLabel = new Label("Your total: ");
 
-		root = new BorderPane();
+		//root = new BorderPane();
 		// Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();

@@ -44,7 +44,7 @@ public class EnterFood {
 
 		roomService.setOnAction(e -> {
 			rootNode.getChildren().clear();
-			rootNode.getChildren().add(new RoomService().getRsNode());
+			rootNode.getChildren().add(new RoomServiceNode().getRsNode());
 		});
 		
 		return rootNode;
