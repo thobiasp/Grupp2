@@ -14,16 +14,12 @@ public abstract class Booking extends Room {
 	protected enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
 	protected BType type;
 	
-	protected Booking(){
+	private Booking(){
 		super();
 	}
 	
-	protected Booking(String name, int roomNum){
-		super(name, roomNum);
-	}
-	
-	public Booking(String name, int roomNum,LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, BType type) {
-		this(name, roomNum);
+	public Booking(LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, BType type) {
+		this();
 		this.createdDT = createdDT;
 		this.startDT = startDT;
 		this.stopDT = stopDT;
@@ -31,8 +27,8 @@ public abstract class Booking extends Room {
 		this.type = type;
 	}
 
-	protected Booking(String name, int roomNum, LocalDateTime createdDT, LocalDateTime startDT, BType type ) {
-		this(name,roomNum);
+	protected Booking(LocalDateTime createdDT, LocalDateTime startDT, BType type ) {
+		this();
 		this.createdDT = createdDT;
 		this.startDT = startDT;
 		this.type = type;

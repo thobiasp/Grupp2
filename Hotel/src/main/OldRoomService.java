@@ -1,9 +1,9 @@
 package main;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.ListIterator;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,19 +14,42 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import main.MenuItem.Types;
 
-public class RoomService {
+//Som vi alla har upplevt så är Git väldigt kinkig.
+	// Så jag rekommendera för den som vill fingranska kod (i vilken fil som
+	// helst, inte bara denna) under en längre period:
+	// kopiera allt och lägg koden i en text fil lokalt. Det verkar skapa
+	// problem när flera har samma fil öppen länge. Även om man inte ändrar i koden så verkar
+	// git klaga ändå.
+
+	// Någon som känner sig sugen på att prova Mercurial?
+	// https://www.mercurial-scm.org/wiki/Repository
+
+
+public class OldRoomService extends Booking {
+
 	ObservableList<MenuItem> menuData = null;
 	ObservableList<MenuItem> pendingOrder = null;
+	float bookingTotal = 0f;
+	BorderPane root = null;
+	
+	public OldRoomService(){
+		super(LocalDateTime.now(), LocalDateTime.now(), BType.FOOD_DRINK);
+	}
 
-	public BorderPane getRsNode() {
+	private OldRoomService(ArrayList<MenuItem> items, float bookingTotal) {
+		this();
+	}
+
+	public BorderPane getRsNode(){
 		BorderPane root = null;
 		Label totalLabel = new Label("Your total: ");
 
 		root = new BorderPane();
-		//Scene scene = new Scene(root);
+		// Scene scene = new Scene(root);
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
 		HBox hbox3 = new HBox();
@@ -39,14 +62,18 @@ public class RoomService {
 		TableColumn<MenuItem, String> itemDescriptionCol = null;
 		TableColumn<MenuItem, Float> itemPriceCol = null;
 
-		TableView<MenuItem> pendingView = new TableView<>();
+		GridPane itemsView = new GridPane();
+
 		TableColumn<MenuItem, String> itemNameCol2 = null;
 		TableColumn<MenuItem, Float> itemPriceCol2 = null;
-		
+
 		pendingOrder = FXCollections.observableArrayList();
 		menuData = FXCollections.observableArrayList();
+		//Till Pontus ;)
+		//***************KNAPP**********************************
 		Button placeOrder = new Button("Place your order");
-		//LinkedList<MenuItem> itemsOrdered = new LinkedList<>();
+		//***************KNAPP**********************************
+		// Se längre neråt för knapp kod
 
 		root.setPrefSize(800, 300);
 		BorderPane.setMargin(hbox1, new Insets(5, 5, 5, 5));
@@ -62,7 +89,7 @@ public class RoomService {
 
 		hbox3.setPrefSize(600, 100);
 		hbox3.setPadding(new Insets(5));
-		hbox3.getChildren().addAll(pendingView, totalLabel);
+		hbox3.getChildren().addAll(itemsView, totalLabel);
 
 		hbox4.setPrefSize(200, 100);
 		hbox4.setPadding(new Insets(10));
@@ -109,58 +136,26 @@ public class RoomService {
 		itemPriceCol2.setPrefWidth(75);
 		itemPriceCol2.setCellValueFactory(new PropertyValueFactory<MenuItem, Float>("price"));
 
-
-		pendingView.getColumns().add(itemNameCol2);
-		pendingView.getColumns().add(itemPriceCol2);
-		pendingView.getItems().addAll(pendingOrder);
-		pendingView.setItems(pendingOrder);
-
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
 		root.setBottom(hbox5);
-		
+
+		// ***************KNAPP KOD ********************************
 		placeOrder.setOnAction((event) -> {
+			ArrayList<MenuItem> items = (ArrayList<MenuItem>) new ArrayList<MenuItem>(pendingOrder);
+			Booking rs = new OldRoomService(items,bookingTotal);
+			RootClass.addBooking(rs);
 		});
+		// ***************KNAPP KOD ********************************
 
 		menuView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
 			MenuItem item = menuView.getSelectionModel().getSelectedItem();
 			if (item != null) {
 				pendingOrder.add(item);
+				this.bookingTotal += item.getPrice();
 			}
-		});
-		pendingView.setOnMouseClicked(event -> {
-			MenuItem item = menuView.getSelectionModel().getSelectedItem();
-			if (item != null) {
-				pendingOrder.remove(item);
-			}
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					ListIterator<MenuItem> it = pendingOrder.listIterator();
-					float theTotal = 0f;
-					while (it.hasNext()) {
-						MenuItem next = it.next();
-						theTotal += next.getPrice();
-					}
-					totalLabel.setText("Your total:  " + theTotal);
-				}
-			});
-		});
+		});	
 		return root;
-		
-		/*
-		 * pendingView.getSelectionModel().selectedItemProperty().addListener((
-		 * observableValue, oldValue, newValue) -> { MenuItem item =
-		 * menuView.getSelectionModel().getSelectedItem(); if (item != null) {
-		 * pendingOrder.remove(item); } Platform.runLater(new Runnable() {
-		 * 
-		 * @Override public void run() { ListIterator<MenuItem> it =
-		 * pendingOrder.listIterator(); float theTotal = 0f; while
-		 * (it.hasNext()){ MenuItem next = it.next(); theTotal +=
-		 * next.getPrice(); } totalLabel.setText("Your total:  " + theTotal); }
-		 * }); });
-		 */
-
 	}
 
 	public void populateMenu(int numItems, ObservableList<MenuItem> menuData) {
