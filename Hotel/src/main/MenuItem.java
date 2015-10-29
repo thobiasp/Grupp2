@@ -10,8 +10,13 @@ public class MenuItem {
 	private String description;
 	private float price;
 	
-	public MenuItem(Types type, String name, String description, float price) {
-		super();
+	public MenuItem(){
+		this.type = null;
+		this.name = "";
+		this.description = "";
+		this.price = 0f;
+	}
+	public MenuItem(Types type,String name, String description, float price) {
 		this.type = type;
 		this.name = name;
 		this.description = description;
