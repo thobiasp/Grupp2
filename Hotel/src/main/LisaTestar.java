@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ListIterator;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -16,19 +17,25 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import main.MenuItem.Types;
 
 public class LisaTestar extends Application {
-	
+
 	ObservableList<MenuItem> menuData = null;
 	ObservableList<MenuItem> pendingOrder = null;
 	float bookingTotal = 0f;
 	BorderPane root = null;
 	Label totalLabel = new Label("Your total: ");
-	
+	Label itemName = null;
+	Label itemPrice = null;
+	Button deleteB = null;
+
 	@Override
 	public void start(Stage primaryStage) {
 		root = new BorderPane();
@@ -39,26 +46,21 @@ public class LisaTestar extends Application {
 		HBox hbox4 = new HBox();
 		HBox hbox5 = new HBox();
 		Label menuLabel = new Label("Room Service Menu");
-		
+
 		TableView<MenuItem> menuView = new TableView<>();
 		TableColumn<MenuItem, String> itemNameCol = null;
 		TableColumn<MenuItem, String> itemDescriptionCol = null;
 		TableColumn<MenuItem, Float> itemPriceCol = null;
 
-		GridPane itemsView = new GridPane();
-		final Button deleteB = new Button("Delete");
-		
 		pendingOrder = FXCollections.observableArrayList();
 		menuData = FXCollections.observableArrayList();
-		//Till Pontus ;)
-		//***************KNAPP**********************************
+		// Till Pontus ;)
+		// ***************KNAPP**********************************
 		Button placeOrder = new Button("Place your order");
-		//***************KNAPP**********************************
 		// Se längre neråt för knapp kod
 
 		root.setPrefSize(800, 300);
-		BorderPane.setMargin(hbox1, new Insets(5, 5, 5, 5));
-
+		BorderPane.setMargin(hbox1, new Insets(5));
 		hbox1.getChildren().add(menuLabel);
 		hbox1.setPrefSize(800, 20);
 		hbox1.setAlignment(Pos.CENTER_LEFT);
@@ -68,18 +70,10 @@ public class LisaTestar extends Application {
 		hbox2.setPadding(new Insets(5));
 		hbox2.getChildren().add(menuView);
 
-		hbox3.setPrefSize(600, 100);
-		hbox3.setPadding(new Insets(5));
-		hbox3.getChildren().addAll(itemsView, totalLabel);
-
 		hbox4.setPrefSize(200, 100);
 		hbox4.setPadding(new Insets(10));
 		hbox4.getChildren().add(placeOrder);
 		this.populateMenu(10, menuData);
-
-		hbox5.setPrefSize(800, 100);
-		hbox5.setPadding(new Insets(5));
-		hbox5.getChildren().addAll(hbox3, hbox4);
 
 		itemNameCol = new TableColumn<>("");
 		itemNameCol.setResizable(false);
@@ -104,19 +98,31 @@ public class LisaTestar extends Application {
 		menuView.getColumns().add(itemPriceCol);
 		menuView.getItems().addAll(menuData);
 		menuView.setItems(menuData);
-		
+
+		GridPane itemsView = new GridPane();
 		itemsView.setAlignment(Pos.CENTER_LEFT);
 		itemsView.setPadding(new Insets(5));
 		itemsView.setPrefWidth(600);
 		itemsView.setPrefSize(600, 100);
 
-		deleteB.setPrefSize(40, 25);
+		hbox3.setPrefSize(600, 100);
+		hbox3.setPadding(new Insets(5));
+		hbox3.getChildren().add(itemsView);
+		hbox5.setPrefSize(800, 100);
+		hbox5.setPadding(new Insets(5));
+		hbox5.getChildren().addAll(hbox3, hbox4);
+		for (int col = 0; col <= 3; col++) {
+			RowConstraints row = new RowConstraints();
+			Button b = new Button("Delete");
+			b.setPrefSize(40, 25);
+			itemsView.getRowConstraints().add(row);
+		}
 
 		root.setTop(hbox1);
 		root.setCenter(hbox2);
 		root.setBottom(hbox5);
-	
-//******Kole*************
+
+		// ******Kole*************
 		root.setId("huvudPane");
 		hbox1.setId("hbox1");
 		hbox2.setId("hbox2");
@@ -129,7 +135,7 @@ public class LisaTestar extends Application {
 		itemNameCol.setId("menuCol_1");
 		itemDescriptionCol.setId("menuCol_2");
 		itemPriceCol.setId("menuCol_3");
-		itemsView.setId("itemsView");//GridPane som fungerar som en vy
+		itemsView.setId("itemsView");// GridPane som fungerar som en vy
 		placeOrder.setId("orderButton");
 
 		primaryStage.setScene(scene);
@@ -138,7 +144,7 @@ public class LisaTestar extends Application {
 		// ***************KNAPP KOD ********************************
 		placeOrder.setOnAction((event) -> {
 			ArrayList<MenuItem> items = (ArrayList<MenuItem>) new ArrayList<MenuItem>(pendingOrder);
-			Booking rs = new RoomServiceBooking(items,bookingTotal);
+			Booking rs = new RoomServiceBooking(items, bookingTotal);
 			RootClass.addBooking(rs);
 		});
 		// ***************KNAPP KOD ********************************
@@ -149,8 +155,9 @@ public class LisaTestar extends Application {
 				pendingOrder.add(item);
 				this.bookingTotal += item.getPrice();
 			}
-		});	
+		});
 	}
+
 	public void populateMenu(int numItems, ObservableList<MenuItem> menuData) {
 		MenuItem food = null;
 		MenuItem drink = null;
@@ -165,6 +172,35 @@ public class LisaTestar extends Application {
 		Collections.sort(menuData, byType);
 	}
 
+	private GridPane reConstructGridPane(GridPane gp) {
+		gp.setAlignment(Pos.CENTER_LEFT);
+		// (Node child,int columnIndex,int rowIndex,int columnspan,int rowspan,
+		// HPos halignment, VPos valignment, Priority hgrow,Priority vgrow)
+		RowConstraints row = new RowConstraints();
+		ColumnConstraints itemCol = new ColumnConstraints();
+		ColumnConstraints priceCol = new ColumnConstraints();
+		ColumnConstraints buttonCol = new ColumnConstraints();
+		itemCol.setPercentWidth(50);
+		priceCol.setPercentWidth(25);
+		buttonCol.setPercentWidth(25);
+		itemCol.setHgrow(Priority.NEVER);
+		priceCol.setHgrow(Priority.NEVER);
+		buttonCol.setHgrow(Priority.NEVER);
+		
+		gp.getColumnConstraints().addAll(itemCol, priceCol, buttonCol);
+		MenuItem mi = new MenuItem();
+		ListIterator<MenuItem> it = pendingOrder.listIterator();
+		int iRow = 0;
+		while (it.hasNext()) {
+			for (int iCol = 0; iCol < 3; iCol++) {
+				mi = it.next();
+				row.setPercentHeight(25);
+				gp.getRowConstraints().add(row);
+			}
+			iRow++;
+		}
+		return gp;
+	}
 
 	public static void main(String[] args) {
 		launch(args);
