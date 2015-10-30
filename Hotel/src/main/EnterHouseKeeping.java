@@ -9,7 +9,7 @@ import javafx.scene.layout.StackPane;
 
 public class EnterHouseKeeping {
 
-public StackPane showButtons(){
+public static StackPane showButtons(){
 		
 		StackPane rootNode = new StackPane();
 		Scene scene = new Scene(rootNode, 800, 300);

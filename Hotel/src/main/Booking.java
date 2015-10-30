@@ -4,21 +4,29 @@ import java.time.LocalDateTime;
 
 // Har skickat ett mail till alla som har all kod som behövs för de nya Datum/Tid fälten. - Lisa 
 
-public abstract class Booking extends Room {
+public class Booking extends Room {
 	
 	protected LocalDateTime createdDT; //Dag och tid då bokningen skapades 
 	protected LocalDateTime startDT; //Datum och tid då eventet börjar
 	protected LocalDateTime stopDT; //Datum och tid då eventet slutar
 
 	protected float price;
-	protected enum BType {FOOD_DRINK,SPA,TRANSPORT,HOUSEKEEPING}
-	protected BType type;
+	protected enum Type {FOOD_DRINK,TREATMENT,SAUNA,JACUZZI,TAXI,HOUSEKEEPING}
+	protected Type type;
 	
-	private Booking(){
+	public Booking(){
 		super();
 	}
 	
-	public Booking(LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, BType type) {
+	
+	public Booking(float price, Type type){
+		createdDT= LocalDateTime.now();
+		this.price = price;
+		this.type = type;
+	}
+	
+	
+	public Booking(LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, Type type) {
 		this();
 		this.createdDT = createdDT;
 		this.startDT = startDT;
@@ -27,7 +35,7 @@ public abstract class Booking extends Room {
 		this.type = type;
 	}
 
-	protected Booking(LocalDateTime createdDT, LocalDateTime startDT, BType type ) {
+	public Booking(LocalDateTime createdDT, LocalDateTime startDT, Type type ) {
 		this();
 		this.createdDT = createdDT;
 		this.startDT = startDT;
@@ -40,8 +48,13 @@ public abstract class Booking extends Room {
 	
 	public String getCreatedDtAsString(){
 		String date = createdDT.getYear() + "-" + createdDT.getMonth() + "-" + createdDT.getDayOfMonth();
-		String time = createdDT.getHour() + "." + createdDT.getMinute();
+		String time = createdDT.getHour() + "." + createdDT.getMinute()+"."+createdDT.getSecond();
 		return date + " " + time;
+	}
+	
+	public String getTypeAsString(){
+		String typeToString = type.toString() ;
+		return typeToString;
 	}
 
 	public void setCreatedDT(LocalDateTime createdDT) {
@@ -83,12 +96,17 @@ public abstract class Booking extends Room {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+	
+	public String getPriceAsString(){
+		String priceString = Float.toString(price);
+		return priceString;
+	}
 
-	public BType getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(BType type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 }

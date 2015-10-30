@@ -1,11 +1,7 @@
 package main;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.TreeMap;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -14,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,18 +28,13 @@ public class RootClass extends Application {
 	LocalDateTime currentTime;
 	EnterSpa enterSpa = new EnterSpa();
 	public static ObservableList<Booking>allBookings=FXCollections.observableArrayList();
-	
-	public static void addBooking(Booking b){
-		allBookings.add(b);
-	}
+	public static ObservableList<HBox> obj=FXCollections.observableArrayList();
+
 
 
 	@Override
 	public void start(Stage primaryStage) {
-		//format to show in listOfEvents
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
-		//format to add to TreeMap so treemap can be sorted
-		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 800, 600);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -52,101 +42,50 @@ public class RootClass extends Application {
 		primaryStage.show();
 		primaryStage.setResizable(false);
 		
-		TreeMap<String,String>mapForEvents = new TreeMap<>();
-		
-		//lists for 'upcomingEvents' center pane
-		ObservableList<HBox> obj=FXCollections.observableArrayList();
-		
-		ListView<HBox> listOfEvents = new ListView<>(obj);
-		
-		
+
 	
+	/*
 		//StackPane for 'root' center pane
-		StackPane centerStack = new StackPane();
+		StackPane centerStack = new StackPane();*/
 		
 
 		//Test buttons to check items in allBookings
-		Button print = new Button("Print");
-		Button clear = new Button("Clear");
-		TextArea testArea =new TextArea();
-		testArea.setPrefHeight(70);
+		Button print = new Button("Print to Console");
+		//Button clear = new Button("Clear");
+
 		HBox testButtons = new HBox(10);
-		testButtons.getChildren().addAll(print,clear,testArea);
+		testButtons.getChildren().addAll(print);
 		root.setBottom(testButtons);
 
-		//Settings for 'upcoming events' BorderPane
-		BorderPane upcomingEvents = new BorderPane();			
-		VBox rightOfCenterPane = new VBox();
-		VBox leftOfCenterPane = new VBox();
-		rightOfCenterPane.setPrefWidth(250);
-		leftOfCenterPane.setPrefWidth(300);
-		
-		//Test button for adding in 'upcoming events'
-		Button add = new Button("test Book");
-		
-		//Add nodes to 'upcoming events' BorderPane
-		upcomingEvents.setRight(rightOfCenterPane);
-		upcomingEvents.setBottom(add);
-		upcomingEvents.setCenter(listOfEvents);
-		upcomingEvents.setLeft(leftOfCenterPane);
-		
 		print.setOnAction(event->{
 			for(Booking e:allBookings){
 				
-				String hej = e.getStartDtAsString()+ e.getType().toString();
-				finalText+=hej+"\n";
+				System.out.println(e.getCreatedDtAsString()+" "+e.getTypeAsString());
+				
 			}
-			
-			testArea.setText(finalText);
+			System.out.println("");
+
 		});
-		
-		
+
+	/*	
 		clear.setOnAction(event->{
-			allBookings.clear();
-			finalText = "";
-			testArea.clear();
+			//allBookings.clear();
+		   
 		});
-		
+		*/
 	
 		
-		//event for button in 'upcomingEvents' bottom
-		add.setOnAction(event->{
-			Date date = new Date();
-
-			HBox hbox = new HBox(20);
-			
-			Button cancelButton = new Button("Cancel");
-			Label timeOfOrder= new Label(dateFormat.format(date));
-			Label test1 = new Label("Taxi");
-			Label price = new Label("150:-");
-			String dateToMap = dateFormat2.format(date);
-			String typeToMap=test1.getText();
-			
-			hbox.getChildren().addAll(timeOfOrder,test1,price,cancelButton);
-			obj.add(hbox);
-			
-			//adding key:date and value:type  to TreeMap 'mapForEvents'
-			mapForEvents.put(dateToMap,typeToMap);
-			
-			
-			//events for cancel button
-			cancelButton.setOnAction(event2->{
-				obj.remove(hbox);
-				mapForEvents.remove(dateToMap);
-				
-				/*
-				bottomVBoxInRoot.getChildren().remove(1);
-				*/		
-			});
-					
-		});
 		
-
 		
-		root.setCenter(centerStack); 
 		
-
-
+		
+		
+		/*####################################################################################*/
+		
+		
+		
+		
+		
 		StackPane topNode = new StackPane();
 		topNode.setPrefSize(800, 150);
 		
@@ -211,37 +150,43 @@ public class RootClass extends Application {
 		topNode.getChildren().add(nightView);
 		topNode.getChildren().add(bpTop);
 		root.setTop(topNode);
+		//root.setCenter(centerStack); 
 		
 		
 		//ActionEvents till huvudknapparna
 		food.setOnAction(e -> {
-			centerStack.getChildren().clear();
+			//centerStack.getChildren().clear();
 			//centerStack.getChildren().add(stack0);
-			centerStack.getChildren().add(new EnterFood().showButtons());
+			root.setCenter(null);
+			root.setCenter(EnterFood.showButtons());
 		});
 		
 		spa.setOnAction(e -> {
-			centerStack.getChildren().clear();
+			//centerStack.getChildren().clear();
 			//centerStack.getChildren().add(stack1);
-			centerStack.getChildren().add(new EnterSpa().showButtons());
+			root.setCenter(null);
+			root.setCenter(EnterSpa.showButtons());
 		});
 		
 		transport.setOnAction(e -> {
-			centerStack.getChildren().clear();
+			//centerStack.getChildren().clear();
 			//centerStack.getChildren().add(stack2);
-			centerStack.getChildren().add(new EnterTransport().showButtons());
+			root.setCenter(null);
+			root.setCenter(EnterTransport.showButtons());
 		});
 		
 		houseKeeping.setOnAction(e -> {
-			centerStack.getChildren().clear();
+			//centerStack.getChildren().clear();
 			//centerStack.getChildren().add(stack3);
-			centerStack.getChildren().add(new EnterHouseKeeping().showButtons());
+			root.setCenter(null);
+			root.setCenter(EnterHouseKeeping.showButtons());
 		});
 		
 		
 		orders.setOnAction(e -> {
-			centerStack.getChildren().clear();
-			centerStack.getChildren().add(upcomingEvents);
+			//centerStack.getChildren().clear();
+			root.setCenter(null);
+			root.setCenter(AllEvents.getNode());
 			
 		});
 		
@@ -261,8 +206,7 @@ public class RootClass extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-
-
+		
 
 	}
 }

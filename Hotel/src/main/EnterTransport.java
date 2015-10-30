@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 
 public class EnterTransport {
 
-	public StackPane showButtons(){
+	public static StackPane showButtons(){
 		
 		StackPane rootNode = new StackPane();
 		Scene scene = new Scene(rootNode, 800, 300);
@@ -38,8 +38,7 @@ public class EnterTransport {
 		// ActionEvents for buttons
 
 		bookTransport.setOnAction(e -> {
-			rootNode.getChildren().clear();
-			rootNode.getChildren().add(new Transport().getNode());
+			
 		});
 
 		quickBook.setOnAction(e -> {

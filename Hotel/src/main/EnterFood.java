@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane;
 
 public class EnterFood {
 
-	public StackPane showButtons(){
+	public static StackPane showButtons(){
 		
 		StackPane rootNode = new StackPane();
 		Scene scene = new Scene(rootNode, 800, 300);
@@ -44,7 +44,6 @@ public class EnterFood {
 
 		roomService.setOnAction(e -> {
 			rootNode.getChildren().clear();
-			rootNode.getChildren().add(new RoomServiceNode().getRsNode());
 		});
 		
 		return rootNode;
