@@ -21,8 +21,11 @@ public class Booking extends Room {
 	
 	public Booking(float price, Type type){
 		createdDT= LocalDateTime.now();
+		startDT=LocalDateTime.of(17, 12, 22, 17, 00);
+		
 		this.price = price;
 		this.type = type;
+
 	}
 	
 	
