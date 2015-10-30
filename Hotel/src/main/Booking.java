@@ -14,6 +14,14 @@ public class Booking extends Room {
 	protected enum Type {FOOD_DRINK,TREATMENT,SAUNA,JACUZZI,TAXI,HOUSEKEEPING}
 	protected Type type;
 	
+	//PONTUS
+	int month;
+	int day;
+	int hour;
+	int minute;
+	String specification;
+	//////////////////////
+	
 	public Booking(){
 		super();
 	}
@@ -34,6 +42,29 @@ public class Booking extends Room {
 		this.price = price;
 		this.type = type;
 	}
+	
+	// PONTUS
+	public Booking(int month, int day, int hour, int minute, float price, String specification, Type type){
+		createdDT= LocalDateTime.now();
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.price = price;
+		this.specification = specification;
+		this.type = type;
+	}
+	
+	public Booking(int month, int day, int hour, int minute, String specification, Type type){
+		createdDT= LocalDateTime.now();
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.specification = specification;
+		this.type = type;
+	}
+	///////////////////////
 
 	public Booking(LocalDateTime createdDT, LocalDateTime startDT, Type type ) {
 		this();

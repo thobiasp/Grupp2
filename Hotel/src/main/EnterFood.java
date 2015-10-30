@@ -39,7 +39,7 @@ public class EnterFood {
 
 		bookTable.setOnAction(e -> {
 			rootNode.getChildren().clear();
-			rootNode.getChildren().add(new BookATable().getNode());
+			rootNode.getChildren().add(BookATable.getNode());
 		});
 
 		roomService.setOnAction(e -> {
