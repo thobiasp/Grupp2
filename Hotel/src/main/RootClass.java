@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 public class RootClass extends Application {
 	
- 
+	String hejhej;
 	String finalText = "";
 
 	LocalDateTime currentTime;
