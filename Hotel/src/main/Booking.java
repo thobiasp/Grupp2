@@ -11,7 +11,7 @@ public class Booking extends Room {
 	protected LocalDateTime stopDT; //Datum och tid då eventet slutar
 
 	protected float price;
-	protected enum Type {FOOD_DRINK,TREATMENT,SAUNA,JACUZZI,TAXI,HOUSEKEEPING}
+	protected enum Type {ROOMSERVICE,TABLE,TREATMENT,SAUNA,JACUZZI,TAXI,HOUSEKEEPING}
 	protected Type type;
 	
 	//PONTUS

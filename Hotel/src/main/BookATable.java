@@ -111,7 +111,7 @@ public class BookATable {
 			int hour = Integer.parseInt(hourAndMinutes[0]);
 			int minute = Integer.parseInt(hourAndMinutes[1]);
 			
-			Booking temp  = new Booking(part2, part3, hour, minute, "Table for" + comBoxPer.getValue().toString(), Type.FOOD_DRINK);
+			Booking temp  = new Booking(part2, part3, hour, minute, "Table for" + comBoxPer.getValue().toString(), Type.TABLE);
 			RootClass.allBookings.add(temp);
 			
 			HBox hbox = new HBox(20);
