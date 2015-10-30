@@ -29,12 +29,13 @@ public class Booking extends Room {
 	
 	public Booking(float price, Type type){
 		createdDT= LocalDateTime.now();
-		startDT=LocalDateTime.of(17, 12, 22, 17, 00);
-		
 		this.price = price;
 		this.type = type;
+		specification = "Quick cab - 15min wait time";
 
 	}
+	
+
 	
 	
 	public Booking(LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, Type type) {

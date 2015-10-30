@@ -26,14 +26,14 @@ public class AllEvents  {
 	
 	
 	//Test button for adding in 'upcoming events'
-	Button testbook = new Button("test Book");
+	//Button testbook = new Button("test Book");
 
 	
-	root.add(testbook, 1, 4);
+
 	root.add(listOfEvents, 1, 1);
 	listOfEvents.setPrefHeight(300);
 
-	
+	/*
 	
 	//event for button in AllEvents
 	testbook.setOnAction(event->{
@@ -58,6 +58,7 @@ public class AllEvents  {
 		});
 				
 	});
+	*/
 	
 return root;
 	
