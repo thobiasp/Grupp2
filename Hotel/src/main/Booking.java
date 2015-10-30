@@ -29,12 +29,13 @@ public class Booking extends Room {
 	
 	public Booking(float price, Type type){
 		createdDT= LocalDateTime.now();
-		startDT=LocalDateTime.of(17, 12, 22, 17, 00);
-		
 		this.price = price;
 		this.type = type;
+		specification = "Quick cab - 15min wait time";
 
 	}
+	
+
 	
 	
 	public Booking(LocalDateTime createdDT, LocalDateTime startDT, LocalDateTime stopDT, float price, Type type) {
@@ -143,4 +144,56 @@ public class Booking extends Room {
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+
+	public int getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+
+	public int getDay() {
+		return day;
+	}
+
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+
+	public int getHour() {
+		return hour;
+	}
+
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+
+	public int getMinute() {
+		return minute;
+	}
+
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
+
+	public String getSpecification() {
+		return specification;
+	}
+
+
+	public void setSpecification(String specification) {
+		this.specification = specification;
+	}
+	
+	
 }

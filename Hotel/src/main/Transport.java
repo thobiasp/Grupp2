@@ -74,7 +74,7 @@ public class Transport /*extends Application*/ {
 		root.add(date, 1, 1);
 		root.add(labelTim, 2, 1);
 		root.add(cb, 3, 1);
-		root.add(bookbn, 4, 5);
+		root.add(bookbn, 5, 1);
 		root.add(hbox, 0, 5);
 		root.setColumnSpan(hbox, 5);
 		
@@ -93,7 +93,7 @@ public class Transport /*extends Application*/ {
 		
 		
 		from.setOnAction(event->{
-			System.out.println("TestTest");
+
 			
 			comformfr.setText(" From "+from.getText().toString());
 			
@@ -130,7 +130,21 @@ public class Transport /*extends Application*/ {
 		
 		bookbn.setOnAction(event->{
 			
-			Booking temp  = new Booking(10,Type.TAXI);
+			String [] parts  = date.getValue().toString().split("-");
+			int part1 = Integer.parseInt(parts[0]);
+			int part2 = Integer.parseInt(parts[1]);
+			int part3 = Integer.parseInt(parts[2]);
+			
+			String fromTo = from.getText().toString()+"-"+to.getText().toString();
+			
+			
+			String [] hourAndMinutes = cb.getValue().toString().split(":");
+			int hour = Integer.parseInt(hourAndMinutes[0]);
+			int minute = Integer.parseInt(hourAndMinutes[1]);
+			
+			
+			Booking temp  = new Booking(part2, part3, hour, minute,fromTo, Type.TAXI);
+			
 			RootClass.allBookings.add(temp);
 			
 			HBox hbox2 = new HBox(20);
@@ -138,8 +152,9 @@ public class Transport /*extends Application*/ {
 			Label timeOfOrder= new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getCreatedDtAsString());
 			Label type = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getTypeAsString());
 			Label price2 = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getPriceAsString());
+			Label speci = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getSpecification());
 			
-			hbox2.getChildren().addAll(timeOfOrder,type,price2,cancelButton);
+			hbox2.getChildren().addAll(timeOfOrder,type,speci,cancelButton);
 			RootClass.obj.add(hbox2);
 			
 			//events for cancel button

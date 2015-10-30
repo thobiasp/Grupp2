@@ -26,14 +26,14 @@ public class AllEvents  {
 	
 	
 	//Test button for adding in 'upcoming events'
-	Button testbook = new Button("test Book");
+	//Button testbook = new Button("test Book");
 
 	
-	root.add(testbook, 1, 4);
+
 	root.add(listOfEvents, 1, 1);
 	listOfEvents.setPrefHeight(300);
 
-	
+	/*
 	
 	//event for button in AllEvents
 	testbook.setOnAction(event->{
@@ -45,8 +45,9 @@ public class AllEvents  {
 		Label timeOfOrder= new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getCreatedDtAsString());
 		Label type = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getTypeAsString());
 		Label price = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getPriceAsString());
+		Label speci = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getSpecification());
 		
-		hbox.getChildren().addAll(timeOfOrder,type,price,cancelButton);
+		hbox.getChildren().addAll(timeOfOrder,type,price,speci,cancelButton);
 		RootClass.obj.add(hbox);
 		
 		//events for cancel button
@@ -57,6 +58,7 @@ public class AllEvents  {
 		});
 				
 	});
+	*/
 	
 return root;
 	
