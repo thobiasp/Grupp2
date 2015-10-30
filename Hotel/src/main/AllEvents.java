@@ -45,8 +45,9 @@ public class AllEvents  {
 		Label timeOfOrder= new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getCreatedDtAsString());
 		Label type = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getTypeAsString());
 		Label price = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getPriceAsString());
+		Label speci = new Label(RootClass.allBookings.get(RootClass.allBookings.size()-1).getSpecification());
 		
-		hbox.getChildren().addAll(timeOfOrder,type,price,cancelButton);
+		hbox.getChildren().addAll(timeOfOrder,type,price,speci,cancelButton);
 		RootClass.obj.add(hbox);
 		
 		//events for cancel button
