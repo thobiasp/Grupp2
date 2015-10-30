@@ -27,8 +27,21 @@ public class BookATable {
 		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 		DatePicker date = new DatePicker();
-
+		
 		Button book = new Button("Book");
+		
+		
+		//TextField time = new TextField();
+				ObservableList<String> timeList = FXCollections.observableArrayList();
+				ComboBox<String> time = new ComboBox<>(timeList);
+				
+				timeList.addAll("17:00", "17:30");
+				timeList.addAll("18:00", "18:30");
+				timeList.addAll("19:00", "19:30");
+				timeList.addAll("20:00", "20:30");
+				timeList.addAll("21:00", "21:30");
+				timeList.addAll("22:00", "22:30");
+		
 		ComboBox<Integer> comBoxPer;
 		ObservableList<Integer> intEntry = FXCollections.observableArrayList();
 		comBoxPer = new ComboBox<>(intEntry);
@@ -38,16 +51,7 @@ public class BookATable {
 		comBoxPer.setMinWidth(100);
 		comBoxPer.setPromptText("2");
 
-		//TextField time = new TextField();
-		ObservableList<String> timeList = FXCollections.observableArrayList();
-		ComboBox<String> time = new ComboBox<>(timeList);
 		
-		timeList.addAll("17:00", "17:30");
-		timeList.addAll("18:00", "18:30");
-		timeList.addAll("19:00", "19:30");
-		timeList.addAll("20:00", "20:30");
-		timeList.addAll("21:00", "21:30");
-		timeList.addAll("22:00", "22:30");
 
 		Label labelDate = new Label();
 		Label labelTime = new Label();

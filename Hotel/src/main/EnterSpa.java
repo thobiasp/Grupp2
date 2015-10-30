@@ -33,17 +33,17 @@ public class EnterSpa {
 		Button treatments = new Button("treatments");
 		Button openingHours = new Button("openingHours");
 		Button sauna = new Button("Sauna");
-		Button Jacuzzi = new Button("Jacuzzi");
+		Button jacuzzi = new Button("Jacuzzi");
 
 		treatments.setPrefSize(400, 150);
 		openingHours.setPrefSize(400, 150);
 		sauna.setPrefSize(400, 150);
-		Jacuzzi.setPrefSize(400, 150);
+		jacuzzi.setPrefSize(400, 150);
 
 		gp.add(treatments, 0, 0);
 		gp.add(openingHours, 1, 0);
 		gp.add(sauna, 0, 1);
-		gp.add(Jacuzzi, 1, 1);
+		gp.add(jacuzzi, 1, 1);
 
 		rootNode.getChildren().add(gp);
 
@@ -62,9 +62,11 @@ public class EnterSpa {
 			System.out.println("test3");
 		});
 
-		Jacuzzi.setOnAction(e -> {
-			System.out.println("test4");
-		});
+		jacuzzi.setOnAction(e -> {
+				rootNode.getChildren().clear();
+				rootNode.getChildren().add(Jacuzzi.getNode());
+			});
+			
 		
 		return rootNode;
 		
