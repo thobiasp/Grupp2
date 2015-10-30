@@ -38,6 +38,7 @@ public class Transport /*extends Application*/ {
 		Label labelTim= new Label("Time");
 		TextField from= new TextField();
 		from.setText("STARGAZE SPA & RESORT");
+		
 		TextField to= new TextField();
 		DatePicker date= new DatePicker();
 		Button bookbn= new Button("Book"); 
@@ -48,6 +49,8 @@ public class Transport /*extends Application*/ {
 		Label comformtime= new Label();
 		Label comformprice=new Label();
 		float price= 35f;
+		comformfr.setText(" From "+from.getText().toString());
+		
 		HBox hbox= new HBox();
 		hbox.getChildren().addAll(comformfr,comformto,comformdate,comformtime,comformprice);
 		root.setHgap(10);
@@ -72,7 +75,8 @@ public class Transport /*extends Application*/ {
 		root.add(labelTim, 2, 1);
 		root.add(cb, 3, 1);
 		root.add(bookbn, 4, 5);
-		root.add(hbox, 1, 5);
+		root.add(hbox, 0, 5);
+		root.setColumnSpan(hbox, 5);
 		
 		to.setDisable(false);
 		date.setDisable(false);
@@ -81,6 +85,7 @@ public class Transport /*extends Application*/ {
 	      from.setOnMouseEntered(e -> {
 	    	  from.setOnMouseClicked(event2 ->{
 	    		  from.setText("");
+	    		  comformfr.setText("");
 	    		  
 	    	  });
 	    	  
@@ -114,9 +119,9 @@ public class Transport /*extends Application*/ {
 		
 
 
-		time.setOnAction(event->{
+		cb.setOnAction(event->{
 		
-			comformtime.setText(" "+time.getText().toString()+" ");
+			comformtime.setText(" "+cb.getValue().toString()+" ");
 			
 			String value= Float.toString(price);
 			comformprice.setText(value +" $ ");
@@ -125,7 +130,7 @@ public class Transport /*extends Application*/ {
 		
 		bookbn.setOnAction(event->{
 			
-			Booking temp  = new Booking(30,Type.TREATMENT);
+			Booking temp  = new Booking(10,Type.TAXI);
 			RootClass.allBookings.add(temp);
 			
 			HBox hbox2 = new HBox(20);
